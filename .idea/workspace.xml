@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/JourneyPlanner.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/data/stops.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/data/trips.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/DrawStops$Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/DrawStops$Stop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/DrawStops$StopSquare.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/DrawStops$Trip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/DrawStops.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI$Move.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/GUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/Location.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/SquaresExample$Square.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/out/production/JourneyPlanner/SquaresExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/src/DrawStops.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/src/GUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/src/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JourneyPlanner/src/SquaresExample.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1pVDAZASiQxOnp2hYG3qoSLtQ9i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jayne\Documents\Vic\JourneyPlanner" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="DrawStops" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DrawStops" />
+      <module name="JourneyPlanner" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DrawStops" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="" />
+      <created>1615259223080</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615259223080</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,5 +1,3 @@
-import jdk.nashorn.api.tree.ArrayLiteralTree;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -58,24 +56,24 @@ public class DrawStops extends GUI {
 
         private final List<Trip> tripsList = new ArrayList<Trip>();
 
-        public class Trip {
-            public String trip_id;
-            public List<String> stopSequence = new ArrayList<String>();
-            //attributes could be eg: time, distance, start and end nodes
-        }
+    public class Trip {
+        public String trip_id;
+        public List<String> stopSequence = new ArrayList<String>();
+        //attributes could be eg: time, distance, start and end nodes
+    }
 
-        public class Stop {
+    public class Stop {
             public String stop_id;
             public String stop_name;
-            public Location stopxy;
+            public Location stop_xy;
             // not needed to be an attribute of the Stop object as I translate this into x y space when I read in the data file
             // and the pixel coordinates will change on redraw so does not belong to the object
             // public double stop_lat; //x coordinates of the latitude coordinates X in window space
             // public double stop_lon; //y coordinates of the longitude Y on screen space, name
 //            public int stop_pixel_x; // pixel coordinates of the latitude coordinates X in window space
 //            public int stop_pixel_y; // pixel coordinates of the latitude coordinates X in window space
-            public List<Trip> adjListIncoming; //is the adjacency list of this node each node has a list of adjacent nodes
-            public List<Trip> adjListOutGoing; // and declare the same for outgoing nodes
+//            public List<Trip> adjListIncoming; //is the adjacency list of this node each node has a list of adjacent nodes
+//            public List<Trip> adjListOutGoing; // and declare the same for outgoing nodes
         }
 
         public class Map {
@@ -88,9 +86,7 @@ public class DrawStops extends GUI {
                 this.trips = trips;
             }
 
-            protected List<Trip> adjListIncoming; //= new List<Edge>();
-            //[nodes.size()][nodes.size()];
-            protected List<Trip> adjListOutgoing; //= new List<Edge>();
+            protected List<Trip> undirectedTrip; //= new List<Edge>();
             //[nodes.size()][nodes.size()];
 
             public void DrawMap() {
@@ -145,7 +141,7 @@ public class DrawStops extends GUI {
                     stop.stop_name = stringLine[1];
                     stop_lat = Double.parseDouble(stringLine[2]);
                     stop_lon = Double.parseDouble(stringLine[3]);
-                    stop.stopxy = Location.newFromLatLon(stop_lat, stop_lon);
+                    stop.stop_xy = Location.newFromLatLon(stop_lat, stop_lon);
                     stopsList.add(stop);
 //                    System.out.println("Stop " + stop.stop_name + stop.stop_id + stop.stopxy);
                     i++;

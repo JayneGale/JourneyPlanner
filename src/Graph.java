@@ -2,19 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-//    public class Node {
-//        public String stop_id;
-//        public List<Edge> adjListIncoming;
-//        public List<Edge> adjListOutgoing;
-//        //attributes could be eg: time, distance, start and end nodes
-//    }
-
-//    public class Edge {
-//        public int edge_id;
-//        public Node fromNode;
-//        public Node toNode;
-//    }
-
     private List<Node> nodes;
     private List<Edge> edges;
 
@@ -43,8 +30,14 @@ public class Graph {
             }
         }
 
-//    protected List<Edge> adjListIncoming; //= new List<Edge>();
-//    //[nodes.size()][nodes.size()];
-//    // Graph requires a draw method
+//        public void DrawMGraph() {
+//            drawGraph();
+//        }
+
+    }
+    // Graph requires a draw method
+
+    private void drawGraph() {
+
     }
 }

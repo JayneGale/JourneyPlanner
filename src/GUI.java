@@ -28,6 +28,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
+import static java.lang.System.out;
+import java.awt.*;
+import static java.lang.Math.max;
 
 /**
  * This is a template GUI that you can use for your mapping program. It is an

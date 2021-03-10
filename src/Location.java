@@ -31,6 +31,7 @@ public class Location {
 	// how many kilometers per degree.
 	private static final double SCALE_LAT = 111.0;
 	private static final double DEG_TO_RAD = Math.PI / 180;
+	static final Location mapCentre_xy = newFromLatLon(CENTRE_LAT, CENTRE_LON);
 
 	// fields are public for easy access, but they are final so that the
 	// location is immutable.

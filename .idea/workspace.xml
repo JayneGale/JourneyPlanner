@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Dijkstra.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MakeMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ReadDataFiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Stop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TrieNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Trip.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$Stop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$StopMarker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$Trip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample$Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample$Square.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DrawStops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrawStops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Edge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SquaresExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SquaresExample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +60,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="DrawStops" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DrawStops" />
+    <configuration name="JourneyPlanner" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="JourneyPlanner" />
       <module name="JourneyPlanner" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -52,7 +69,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DrawStops" />
+        <item itemvalue="Application.JourneyPlanner" />
       </list>
     </recent_temporary>
   </component>
@@ -78,5 +95,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TrieNode.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -13,6 +13,43 @@ import java.util.Random;
  * draws some squares to the drawing area which are removed when clicked. Some
  * information is given in the text area, and pressing any of the navigation
  * buttons makes a new set of squares.
+ *      * Create a new Class
+ *      * public class Graph{
+ *      *     private List<Node> nodes;
+ *      *  private List<Edge> edges;
+ *      *  { this,nodes = nodes
+ *      *      this.edges = edges
+ *      *
+ *      *    private List<> adjList = new int[nodes.size()]nodes.size()];]
+ *      * }
+ *      * public Graph(List<Node> nodes, List<> Edge) edges {
+ *      *     this.
+ *      * adjMatrix initialise to false
+ *      *
+ *      * for (int  < nodes.size();
+ *      * for j < nodes size()
+ *      * adjMatrix[i][j] = -1;
+ *      *
+ *      * in the Node Class
+ *      * public List<Edge> adjListIn; is the adjacency list of this node each node has a list of adjacent nodes
+ *      * and declare the same for outgoing nodes
+ *      * for (Node node : nodes) {
+ *      *     node.adjListIn = new Arraylist <>();
+ *      *     initialising both
+ *      *     }
+ *      *     now enumerate all the edges from the node
+ *      *     for Edge edge : edges){
+ *      *         edge.fromNode.adjListIOut add(edge.toNode) add the toNode for each node
+ *      *         r
+ *      *         Now create a separate outgoing
+ *      * public List<Node> getNodes() {
+ *      *     return nodes;
+ *      *     }
+ *      *
+ *      *     same for Edge
+ *      *     the List has to be a List of Edges so we can get all the Edge information
+ *      *
+ *      * author jayne
  * 
  * @author tony
  */

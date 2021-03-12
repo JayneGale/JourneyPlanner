@@ -2,42 +2,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-    private List<Node> nodes;
+    private List<Stop> stops;
     private List<Edge> edges;
 
-    public Graph(List<Node> nodes, List<Edge> edges) {
-        this.nodes = nodes;
+    public Graph(List<Stop> stops, List<Edge> edges) {
+        this.stops = stops;
         this.edges = edges;
 
         // construct the adjacency lists
-        for (Node node : nodes) {
-            node.adjListIncoming = new ArrayList<>();
-            node.adjListOutgoing = new ArrayList<>();
+        for (Stop stop : stops) {
+            stop.adjListIncoming = new ArrayList<>();
+            stop.adjListOutgoing = new ArrayList<>();
         }
         for (Edge edge : edges) {
-            edge.toNode.adjListIncoming.add(edge);
-            edge.fromNode.adjListOutgoing.add(edge);
+            edge.toStop.adjListIncoming.add(edge);
+            edge.fromStop.adjListOutgoing.add(edge);
         }
 
-        for (Node node : nodes) {
-            for (Edge edge : node.adjListOutgoing) {
+        for (Stop stop : stops) {
+            for (Edge edge : stop.adjListOutgoing) {
                 Edge outgoingEdge = edge;
-                Node outgoingNeighbour = edge.toNode;
+                Stop outgoingNeighbour = edge.toStop;
             }
-            for (Edge edge : node.adjListIncoming) {
+            for (Edge edge : stop.adjListIncoming) {
                 Edge incomingEdge = edge;
-                Node incomingNeighbour = edge.fromNode;
+                Stop incomingNeighbour = edge.fromStop;
             }
         }
-
-//        public void DrawMGraph() {
+//// Graph requires a draw method
+//        public void DrawGraph () {
 //            drawGraph();
 //        }
-
-    }
-    // Graph requires a draw method
-
-    private void drawGraph() {
-
+//
+//    }
+//
+//    private void drawGraph() {
+//    }
     }
 }

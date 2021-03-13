@@ -66,22 +66,21 @@ public class ReadDataFiles {
 //        System.out.println("scale " + scale + " scale_x " + scale_x + " Scale y " + scale_y);
         return stopsList;
     }
-    public List<Trip> ReadTrips(File tripfile) throws IOException {
+    public List<Trip> ReadTrips(File tripfile, List<Stop> stopsList) throws IOException {
         System.out.println("Started dataImport Trips Method");
         BufferedReader br = new BufferedReader(new FileReader(tripfile));
         String line = null;
         String[] stringLine;
-
         List<Trip> tripsList = new ArrayList<>();
         int i = 0;
         while(true){
             line = br.readLine();
             if(line == null){
-
                 break;
             }
             // skip the header line
             if(i == 0){
+                //start each time with an empty tripsList
                 tripsList.clear();
                 i++;
             }
@@ -89,17 +88,35 @@ public class ReadDataFiles {
 //                System.out.println("Line " + i);
                 stringLine = line.split("\t");
                 String trip_id = stringLine[0];
-                List tripSequence = new ArrayList();
+//               create a list of Stops from this String sequence of stop_ids for this trip_id
+                List<Stop> tripSequence = new ArrayList();
+//                Stop unknownStop = new Stop (null, "unknown",
+//                        0,0, null, null, null);
+                // the number of stops in the trip sequence is the length of the string minus the first item, the the trip_id
                 int numStops = stringLine.length - 1;
                 System.out.println("Trip " + trip_id + " First Stop " + stringLine[1]  + " Last Stop " + stringLine[numStops] + " No. stops " + numStops);
                 for (int j = 1; j < stringLine.length; j++){
-//                    if (i == 1) {
-//                        System.out.println("stop " + j + ": " + stringLine[j]);
-//                    }
-                    tripSequence.add(stringLine[j]);
+                    //stringline[1] to stringLine[numStops] inclusive should be a stop id. If so, add that stop to the trip sequence
+                    for (Stop s : stopsList){
+                        if(stringLine[j].equals(s.stop_id)){
+                            System.out.println("s.stop_id = " + s.stop_id + " Stop name " + s.stop_name);
+                            tripSequence.add(s);
+                            System.out.println("s.Stop name " + s.stop_name);
+                        }
+                    }
                 }
+                // TO DO: now run through the tripSequence and create the edge files for each stop in the trip sequence 
+                //  s.adjListIncoming.add()
+                //  s.adjListOutgoing.add()
+                //  fromStop = tripSequence j - 1
+                //  toStop = tripSequence j + 1)
+                //  Edge edge = new Edge (edge_id, fromStop, toStop)
+
+                System.out.println("Trip " + trip_id + " First stop " + tripSequence.get(0).stop_name + " Last Stop " + tripSequence.get(numStops-1).stop_name + " No. stops " + numStops);
+                // put that trip_id and Stop sequence into a Trip structure
                 Trip trip = new Trip (trip_id, tripSequence);
                 tripsList.add(trip);
+                // now set up for the next line by clearing out the list
                 tripSequence.clear();
 //                System.out.println("Trip " + trip.trip_id + trip.stopSequence);
                 i++;

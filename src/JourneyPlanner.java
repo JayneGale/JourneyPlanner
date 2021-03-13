@@ -77,7 +77,7 @@ public class JourneyPlanner extends GUI {
         CheckDataFiles(stopFile, tripFile);
         ReadDataFiles r = new ReadDataFiles();
         stopsList = r.ReadStops(stopFile);
-        tripsList = r.ReadTrips(tripFile);
+        tripsList = r.ReadTrips(tripFile, stopsList);
         MakeMap m = new MakeMap();
         edgeList = m.CreateEdgeList(tripsList);
         System.out.println("Finished dataImport stopFile");

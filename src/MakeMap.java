@@ -11,9 +11,19 @@ public class MakeMap {
         for (Trip t : tripsList){
             List<Stop> stops = t.tripSequence;
             int numStops = t.tripSequence.size();
-            for (int i = 0; i < numStops - 1; i++){
+            List<Edge> tripEdges = new ArrayList();
+            for (int i = 0; i < numStops; i++){
                 Stop fromStop = stops.get(i);
-                Stop toStop = stops.get(i+1);
+                if (i >= numStops){
+
+                    Stop toStop = stops.get(i+1);
+                Edge e = new Edge(fromStop, toStop);
+                if (!tripEdges.contains(e)){
+                    tripEdges.add(e);
+                }
+
+                }
+
 //                Edge obj = Object.create(Edge) {
 //                    obj.fromStop = fromStop;
 //                    obj.toStop = toStop;

@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Dijkstra.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MakeMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ReadDataFiles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Stop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TrieNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Trip.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$Stop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$StopMarker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops$Trip.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/DrawStops.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample$Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample$Square.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/SquaresExample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DrawStops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrawStops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Edge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SquaresExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SquaresExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JourneyPlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MakeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MakeMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadDataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadDataFiles.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +39,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

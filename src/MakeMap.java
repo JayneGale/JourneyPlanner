@@ -20,16 +20,18 @@ public class MakeMap {
                 Edge e = new Edge(fromStop, toStop);
                 if (!tripEdges.contains(e)){
                     tripEdges.add(e);
-                }
+                    }
 
                 }
 
-//                Edge obj = Object.create(Edge) {
-//                    obj.fromStop = fromStop;
-//                    obj.toStop = toStop;
-                }
             }
+        }
 //                if (edgeList contains stops[i]
         return edgeList;
+    }
+    public Graph CreateGraph(List<Stop> stops, List<Edge> edges){
+        Graph g = new Graph(stops, edges);
+        return g;
+
     }
 }

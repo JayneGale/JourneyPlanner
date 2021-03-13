@@ -39,7 +39,8 @@ public class ReadDataFiles {
                 Location stop_xy = Location.newFromLatLon(stop_lat, stop_lon);
                 List<Edge> adjListIncoming = null;
                 List<Edge> adjListOutgoing = null;
-                Stop stop = new Stop (stop_id, stop_name, stop_lat, stop_lon, stop_xy, adjListIncoming, adjListOutgoing);
+                List<Trip> tripsthruStop = null;
+                Stop stop = new Stop (stop_id, stop_name, stop_lat, stop_lon, stop_xy, adjListIncoming, adjListOutgoing, tripsthruStop);
 
                     double xdist = Math.abs(stop.stop_xy.x - Location.mapCentre_xy.x);
                 if ( xdist > max_xdist) {
@@ -73,6 +74,8 @@ public class ReadDataFiles {
         String[] stringLine;
         List<Trip> tripsList = new ArrayList<>();
         int i = 0;
+        Stop firstStop = null;
+        Stop lastStop = null;
         while(true){
             line = br.readLine();
             if(line == null){
@@ -114,7 +117,9 @@ public class ReadDataFiles {
 
                 System.out.println("Trip " + trip_id + " First stop " + tripSequence.get(0).stop_name + " Last Stop " + tripSequence.get(numStops-1).stop_name + " No. stops " + numStops);
                 // put that trip_id and Stop sequence into a Trip structure
-                Trip trip = new Trip (trip_id, tripSequence);
+                firstStop = tripSequence.get(0);
+                lastStop = tripSequence.get(numStops-1);
+                Trip trip = new Trip (trip_id, tripSequence, firstStop, lastStop);
                 tripsList.add(trip);
                 // now set up for the next line by clearing out the list
                 tripSequence.clear();
@@ -124,5 +129,4 @@ public class ReadDataFiles {
         }
         return tripsList;
     }
-
 }

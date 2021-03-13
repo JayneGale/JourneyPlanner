@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class Graph {
                 Stop incomingNeighbour = edge.fromStop;
             }
         }
-//// Graph requires a draw method
-//        public void DrawGraph () {
-//            drawGraph();
+////// Graph requires a draw method
+//        public void draw(Graphics g) {
+//            g.setColor(color);
+//            g.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
 //        }
 //
 //    }

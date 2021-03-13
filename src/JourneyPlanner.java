@@ -10,6 +10,7 @@ public class JourneyPlanner extends GUI {
     public List<Stop> stopsList = new ArrayList<>();
     public List<Trip> tripsList = new ArrayList<>();
     public List<Edge> edgeList = new ArrayList<>(); // directed edges
+    public Graph graph = new Graph(stopsList, edgeList);
     // if there exists a stop sequence AB in any Tripsequence then the edge from A to B exists
     // if there exists a stop sequence BA in any Tripsequence, the edge from B to A exists
 
@@ -17,7 +18,8 @@ public class JourneyPlanner extends GUI {
         // do something
     }
     /** Backlog
-     * TO DO: Create Graph structure (to make Graphics g work) TO DO: Draw the Map of the Stops
+     * TO DO: Create Graph structure (to make Graphics g work)
+     * TO DO: Draw the Map of the Stops
      * TO DO: create the (directional) edges of the Graph from the Stop sequence
      * TO DO: Create the in and out adjacency Lists for each Stop
      * To DO: Create fromStop and toStop in the Trips structure
@@ -77,10 +79,17 @@ public class JourneyPlanner extends GUI {
         CheckDataFiles(stopFile, tripFile);
         ReadDataFiles r = new ReadDataFiles();
         stopsList = r.ReadStops(stopFile);
+        System.out.println("Finished dataImport stopFile");
         tripsList = r.ReadTrips(tripFile, stopsList);
+        System.out.println("Finished dataImport tripFile");
         MakeMap m = new MakeMap();
         edgeList = m.CreateEdgeList(tripsList);
-        System.out.println("Finished dataImport stopFile");
+        System.out.println("Finished MakeMap edgeFile");
+        graph = m.CreateGraph(stopsList, edgeList);
+        Stop firstStop = stopsList.get(0);
+        String name = firstStop.stop_name;
+//        String neighbour = stopsList.get(0).adjListOutgoing.get(0).toStop.stop_name;
+//        System.out.println("Finished MakeMap CreateGraph " + name + neighbour);
     }
     private void CheckDataFiles(File stopFile, File tripFile) {
         String text1 = "stopFile not found";

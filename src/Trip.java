@@ -6,11 +6,14 @@ public class Trip {
 
     String trip_id;
     List tripSequence;
+    Stop firstStop;
+    Stop lastStop;
+
     // pseudocod. If there is a stop sequence from Stop A to Stop B, create a fromNode for AB
     //    Stop fromStop;
     //    Stop toStop;
 
-    public Trip(String trip_id, List tripSequence){ //, Stop fromStop, Stop toStop)
+    public Trip(String trip_id, List tripSequence, Stop firstStop, Stop lastStop){ //, Stop fromStop, Stop toStop)
         this.trip_id= trip_id;
         this.tripSequence = tripSequence;
 //        this.fromStop = fromStop;

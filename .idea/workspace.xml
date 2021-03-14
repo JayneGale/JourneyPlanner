@@ -3,17 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/Graph.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/JourneyPlanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/JourneyPlanner.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/MakeMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/MakeMap.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/ReadDataFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/ReadDataFiles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/Stop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/Stop.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/Trip.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/Trip.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JourneyPlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MakeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MakeMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ReadDataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadDataFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Trip.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +44,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
   </component>
   <component name="RecentsManager">

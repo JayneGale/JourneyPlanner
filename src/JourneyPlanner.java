@@ -77,17 +77,33 @@ public class JourneyPlanner extends GUI {
     protected void onLoad(File stopFile, File tripFile) throws IOException {
         //create some error messages - not really needed as this is already done for us I see
         CheckDataFiles(stopFile, tripFile);
+        // read data files
         ReadDataFiles r = new ReadDataFiles();
         stopsList = r.ReadStops(stopFile);
-        System.out.println("Finished dataImport stopFile");
+//        System.out.println("Finished dataImport stopFile");
         tripsList = r.ReadTrips(tripFile, stopsList);
-        System.out.println("Finished dataImport tripFile");
+        int numTrips = tripsList.size();  // there are 101 trips
+        Trip lastTrip = tripsList.get(numTrips-1);
+        int numLStops = lastTrip.tripSequence.size();
+        Stop lastTripLastStop = lastTrip.tripSequence.get(numLStops - 1);
+        System.out.println("JP onLoad l 88 tripsList: Last trip " + lastTrip.trip_id + " has " + numLStops + " stops " + " the last stop is " +  lastTripLastStop.stop_id + " " + lastTripLastStop.stop_name);
+//        System.out.println("Finished dataImport tripFile and first element" + tripsList.get(0).tripSequence.get(0).stop_name + tripsList.get(numTrips -1).tripSequence.get(0) );
+
+        //Create the edgeList and the Graph of stops and edges between stops
         MakeMap m = new MakeMap();
         edgeList = m.CreateEdgeList(tripsList);
-        System.out.println("Finished MakeMap edgeFile");
-        graph = m.CreateGraph(stopsList, edgeList);
-        Stop firstStop = stopsList.get(0);
-        String name = firstStop.stop_name;
+        // test an Edge that should exist exists
+        //        Stop Mandorah = new Stop("OOBUS826", "Mandorah 826", -12.443,130.768, Location.newFromLatLon(-12.443, 130.768), null, null, null);
+        //        Stop Cullen = new Stop("OOBUS825", "Cullen Bay 825", -12.4517,130.82, Location.newFromLatLon(-12.4517,130.82),null, null, null);
+        //        Edge MandorahCullen = new Edge (Mandorah, Cullen);
+        //        boolean listworks = edgeList.contains(MandorahCullen);
+        //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
+        //        ...and damn the boolean shows that edgeList doesn't contain Mandorah to Cullen Bay even though the Edge is in there
+
+                graph = m.CreateGraph(stopsList, edgeList);
+
+//        Stop firstStop = stopsList.get(0);
+//        String name = firstStop.stop_name;
 //        String neighbour = stopsList.get(0).adjListOutgoing.get(0).toStop.stop_name;
 //        System.out.println("Finished MakeMap CreateGraph " + name + neighbour);
     }

@@ -5,21 +5,16 @@ public class Trip {
     //    TO DO create List Map Edges with attributes toStop and fromStop
 
     String trip_id;
-    List tripSequence;
+    List<Stop> tripSequence; // a List of Stop objects
     Stop firstStop;
     Stop lastStop;
 
-    // pseudocod. If there is a stop sequence from Stop A to Stop B, create a fromNode for AB
-    //    Stop fromStop;
-    //    Stop toStop;
-
-    public Trip(String trip_id, List tripSequence, Stop firstStop, Stop lastStop){ //, Stop fromStop, Stop toStop)
+// A trip is a sequence of Stops for a bus. It's normal for a Bus to display its final Stop (lastStop) to identify it to potential users of the Trip
+    public Trip(String trip_id, List<Stop> tripSequence, Stop firstStop, Stop lastStop){ //, Stop fromStop, Stop toStop)
         this.trip_id= trip_id;
         this.tripSequence = tripSequence;
-//        this.fromStop = fromStop;
-//        this.toStop = toStop;
+        this.firstStop = firstStop;
+        this.lastStop = lastStop;
     }
-//    for(Stop s : tripSequence){
-
 }
 

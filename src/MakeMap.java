@@ -15,7 +15,7 @@ public class MakeMap {
     //  toStop = tripSequence j + 1)
     //  Edge edge = new Edge (edge_id, fromStop, toStop)
 
-    public List<Edge> CreateEdgeList(List<Trip> tripsList) {
+    public List<Edge> CreateEdgeList(List<Trip> tripsList, List<Stop> stopslist) {
         edgeList.clear();
         for (Trip t : tripsList) {
             List<Stop> stopSequence = t.tripSequence;
@@ -37,6 +37,9 @@ public class MakeMap {
 //                        System.out.println(" MakeMap 37 new Edge for Stop " + e.fromStop.stop_name + " to Stop" + e.toStop.stop_name);
                     }
                    edgeList = AddTripEdge(e, edgeList);
+                    //ugh I could put this in here when generating the edgelist, but this list repeats so  have to return 2 values ie the Graph, so do this later from the final edgeList
+//                   fromStop.adjListOutgoing.add(e);
+//                   toStop.adjListIncoming.add(e);
                 }
             }
         }
@@ -47,18 +50,19 @@ public class MakeMap {
         return edgeList;
     }
 
-    public Graph CreateGraph(List<Stop> stops, List<Edge> edges) {
-        Graph g = new Graph(stops, edges);
+    public Graph CreateGraph(List<Stop> stopsList, List<Edge> edgeList) {
+        Graph gr = new Graph(stopsList, edgeList);
         System.out.println("CreateGraph started ");
-//        for (Stop s : stops) {
-//            List<Edge> adjListIn = s.adjListIncoming;
-//            List <Edge> adjListOut = s.adjListOutgoing;
+//        for (Edge e : edgeList){
+//
 //        }
-//        System.out.println("CreateGrapgh started " + g.stops);
-        return g;
-
+        for (Stop s : stopsList) {
+            List<Edge> adjListIn = s.adjListIncoming;
+            List <Edge> adjListOut = s.adjListOutgoing;
+        }
+        System.out.println("CreateGraph ln 63 " + stopsList.get(0).adjListIncoming.isEmpty());
+        return gr;
     }
-
     private List<Edge> AddTripEdge(Edge e, List<Edge> edgeList) {
         if (!edgeList.contains(e)) {
 //            System.out.println("AddTripEdge ln 64 MakeMap Adding new Edge from Stop " + e.fromStop.stop_name + " to Stop " + e.toStop.stop_name);
@@ -66,6 +70,13 @@ public class MakeMap {
         }
         return edgeList;
     }
+
+//    public List<Stop> CreateAdjacencyLists(List<Edge> edgeList, List<Stop> stopsList) {
+//        for (e : edgeList){
+//
+//        }
+//        return stopsList
+//    }
 // Put these into draw() But where to put draw()
 //        double scale;
 //        double screenpixel_u = JourneyPlanner.getDrawingAreaDimension().getWidth();

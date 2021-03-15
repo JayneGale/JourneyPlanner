@@ -11,6 +11,8 @@ public class JourneyPlanner extends GUI {
     public List<Trip> tripsList = new ArrayList<>();
     public List<Edge> edgeList = new ArrayList<>(); // directed edges
     public Graph graph = new Graph(stopsList, edgeList);
+    public Location origin = new Location (-40,16);
+    public double scale = 20;
     // if there exists a stop sequence AB in any Tripsequence then the edge from A to B exists
     // if there exists a stop sequence BA in any Tripsequence, the edge from B to A exists
 
@@ -18,12 +20,6 @@ public class JourneyPlanner extends GUI {
         // do something
     }
     /** Backlog
-     * TO DO: Create Graph structure (to make Graphics g work)
-     * TO DO: Draw the Map of the Stops
-     * TO DO: create the (directional) edges of the Graph from the Stop sequence
-     * TO DO: Create the in and out adjacency Lists for each Stop
-     * To DO: Create fromStop and toStop in the Trips structure
-     * TO DO: Centre map
      * TO DO: Pan map
      * TO DO: Zoom map
      * TO DO: Display attributes of Stops on Map
@@ -34,20 +30,26 @@ public class JourneyPlanner extends GUI {
      * Implement Trie Structure#
      * Nice to have: Display attributes of Edges on Map
      * Nice to have: Refactor DrawStops methods into separate Classes; call the Classes from the JourneyPlannerMain Class Tue 16 March
+     *
+     *
      * DONE
      * Load files into Classes
      * Implement Stop class except for draw method, Adjacency Lists
      * Implement Trip Class except for fromStop and ToStop
      * Take out the StopMarkers ArrayList and just use Stops
      * Create separate methods for Stops, Trips and Data Input
+     * Create Graph structure (to make Graphics g work)
+     * Draw the Map of the Stops
+     * Create the (directional) edges of the Graph from the Stop sequence
+     * Create the in and out adjacency Lists for each Stop
+     * Create fromStop and toStop in the Trips structure
+     * Centre map
      */
 
     @Override
     protected void redraw(Graphics g) {
 //        // TO DO: rewrite this class. Public transport class extends this GUI class.
-//        for (Stop s : stopList) {
-//            s.draw(g);
-//        }
+        graph.draw(g, origin, scale);
     }
 
     @Override
@@ -71,7 +73,33 @@ public class JourneyPlanner extends GUI {
 
     @Override
     protected void onMove(Move m) {
-
+//        double delta_kms = 10;
+//        double dx, dy;
+//        onMove(Move.EAST);
+//        {
+//            dx = delta_kms;
+//            dy = 0;
+//        }
+//        onMove(Move.WEST){
+//            dx = - delta_kms;
+//            dy = 0;
+//        }
+//        onMove(Move.NORTH){
+//            dx = 0;
+//            dy = - delta_kms;
+//        }
+//        onMove(Move.SOUTH){
+//            dx = 0;
+//            dy = - delta_kms;
+//        };
+//        origin = new Location (origin.x +	dx,origin.y + dy);
+        // from the lecture notes
+        // on any of the move arrows, we set a distance (eg dx = 10km) for each click on the arrow
+        // for move, we move the origin
+    //         dx = loc.x-origin.x;
+    //         dy = origin.y– loc.y;
+    //         orig.x = orig.x + dx;
+    //         orig.y = orig.y + dy;
     }
     @Override
     protected void onLoad(File stopFile, File tripFile) throws IOException {
@@ -90,8 +118,12 @@ public class JourneyPlanner extends GUI {
 //        System.out.println("Finished dataImport tripFile and first element" + tripsList.get(0).tripSequence.get(0).stop_name + tripsList.get(numTrips -1).tripSequence.get(0) );
 
         //Create the edgeList and the Graph of stops and edges between stops
-        MakeMap m = new MakeMap();
-        edgeList = m.CreateEdgeList(tripsList);
+        MakeMap map = new MakeMap();
+        edgeList = map.CreateEdgeList(tripsList, stopsList);
+        System.out.println("JP ln 95 check adjLists exist look at the first stop name");
+        System.out.println(stopsList.get(0).stop_name);
+
+//        stopsList = m.CreateAdjacencyLists(edgeList, stopsList);
         // test an Edge that should exist exists
         //        Stop Mandorah = new Stop("OOBUS826", "Mandorah 826", -12.443,130.768, Location.newFromLatLon(-12.443, 130.768), null, null, null);
         //        Stop Cullen = new Stop("OOBUS825", "Cullen Bay 825", -12.4517,130.82, Location.newFromLatLon(-12.4517,130.82),null, null, null);
@@ -100,7 +132,7 @@ public class JourneyPlanner extends GUI {
         //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
         //        ...and damn the boolean shows that edgeList doesn't contain Mandorah to Cullen Bay even though the Edge is in there
 
-                graph = m.CreateGraph(stopsList, edgeList);
+        graph = map.CreateGraph(stopsList, edgeList);
 
 //        Stop firstStop = stopsList.get(0);
 //        String name = firstStop.stop_name;

@@ -1,6 +1,8 @@
+import java.awt.*;
 import java.util.List;
 
 public class Stop {
+    public boolean isHighlighted = false;
     String stop_id;
     String stop_name;
     double stop_lat;
@@ -20,6 +22,11 @@ public class Stop {
         this.adjListIncoming = adjListIncoming;
         this.adjListOutgoing = adjListOutgoing;
         this.tripsthruStop = tripsthruStop;
+    }
+
+    public void draw(Graphics g, Location origin, double scale) {
+        Point xyPoint = stop_xy.asPoint(origin, scale);
+        g.fillRect(xyPoint.x, xyPoint.y, 4,4);
     }
 }
 

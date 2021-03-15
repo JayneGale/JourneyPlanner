@@ -81,7 +81,7 @@ public abstract class GUI {
 	protected abstract void onMove(Move m);
 
 	/**
-	 * Is called when the user has successfully selected a directory to load the
+	 * onLoad Is called when the user has successfully selected a directory to load the
 	 * data files from.
 	 * 
 	 * @param stopFile

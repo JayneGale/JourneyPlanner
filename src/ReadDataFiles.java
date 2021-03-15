@@ -18,6 +18,10 @@ public class ReadDataFiles {
         int i = 0;
         double max_xdist = 0;
         double max_ydist = 0;
+        double xdistmin = 0;
+        double xdistmax = 0;
+        double ydistmin = 0;
+        double ydistmax = 0;
 
             while(true){
                 line = br.readLine();
@@ -41,22 +45,40 @@ public class ReadDataFiles {
                 List<Edge> adjListOutgoing = null;
                 List<Trip> tripsthruStop = null;
                 Stop stop = new Stop (stop_id, stop_name, stop_lat, stop_lon, stop_xy, adjListIncoming, adjListOutgoing, tripsthruStop);
-
-                double xdist = Math.abs(stop.stop_xy.x - Location.mapCentre_xy.x);
+                double xdisttemp = stop.stop_xy.x - Location.mapCentre_xy.x;
+                double xdist = Math.abs(xdisttemp);
                 if ( xdist > max_xdist) {
                     max_xdist = xdist;
                 }
-                double ydist = Math.abs(stop.stop_xy.y - Location.mapCentre_xy.y);
-                if ( ydist > max_ydist) {
+                if (xdisttemp > xdistmax) {
+                    xdistmax = xdisttemp;
+                }
+                if (xdisttemp < xdistmin) {
+                    xdistmin = xdisttemp;
+                }
+                double ydisttemp = stop.stop_xy.y - Location.mapCentre_xy.y;
+                double ydist = Math.abs(ydisttemp);
+                if (ydist > max_ydist) {
                     max_ydist = ydist;
                 }
+                if (ydisttemp > ydistmax) {
+                    ydistmax = ydisttemp;
+                }
+                if (ydisttemp < ydistmin) {
+                    ydistmin = ydisttemp;
+                }
+
                 stopsList.add(stop);
 //                System.out.println("Stop " + stop.stop_name + stop.stop_xy);
                 i++;
             }
         }
-//        System.out.println("Max x kms: " + max_xdist + " Max y kms: " + max_ydist);
-        return stopsList;
+        System.out.println("Max x kms: " + max_xdist + " Max y kms: " + max_ydist);
+        System.out.println("X kms from: " + xdistmin + " to: " + xdistmax + " Y kms: " + ydistmin + " to: " + ydistmax);
+// so the map is centred on CENTRE MAP and is about ~40km wide and ~32km high
+            // for an 800 x 800 pixel window that is a scale of 800/40 = 20 pixels per km
+            //Zooming in to an area 20km wide would mean a scale of 800/20 = 40 pixels per km
+            return stopsList;
     }
     public List<Trip> ReadTrips(File tripfile, List<Stop> stopsList) throws IOException {
         System.out.println("Started dataImport Trips Method");

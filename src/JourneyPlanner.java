@@ -13,6 +13,8 @@ public class JourneyPlanner extends GUI {
     public Graph graph = new Graph(stopsList, edgeList);
     public Location origin = new Location (-40,16);
     public double scale = 20;
+    public double dx = 0;
+    public double dy = 0;
     // if there exists a stop sequence AB in any Tripsequence then the edge from A to B exists
     // if there exists a stop sequence BA in any Tripsequence, the edge from B to A exists
 
@@ -50,6 +52,7 @@ public class JourneyPlanner extends GUI {
     protected void redraw(Graphics g) {
 //        // TO DO: rewrite this class. Public transport class extends this GUI class.
         graph.draw(g, origin, scale);
+
     }
 
     @Override
@@ -73,38 +76,46 @@ public class JourneyPlanner extends GUI {
 
     @Override
     protected void onMove(Move m) {
-//        double delta_kms = 10;
-//        double dx, dy;
-//        onMove(Move.EAST);
-//        {
-//            dx = delta_kms;
-//            dy = 0;
-//        }
-//        onMove(Move.WEST){
-//            dx = - delta_kms;
-//            dy = 0;
-//        }
-//        onMove(Move.NORTH){
-//            dx = 0;
-//            dy = - delta_kms;
-//        }
-//        onMove(Move.SOUTH){
-//            dx = 0;
-//            dy = - delta_kms;
-//        };
-//        origin = new Location (origin.x +	dx,origin.y + dy);
         // from the lecture notes
         // on any of the move arrows, we set a distance (eg dx = 10km) for each click on the arrow
         // for move, we move the origin
-    //         dx = loc.x-origin.x;
-    //         dy = origin.y– loc.y;
-    //         orig.x = orig.x + dx;
-    //         orig.y = orig.y + dy;
+        //         dx = loc.x-origin.x;
+        //         dy = origin.y– loc.y;
+        //         orig.x = orig.x + dx;
+        //         orig.y = orig.y + dy;
+
+        double delta_kms = 10;
+        if(m == Move.EAST)        {
+            dx = -delta_kms;
+            dy = 0;
+            System.out.println("Direction: EAST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+
+        };
+        if(m == Move.WEST)        {
+            dx = delta_kms;
+            dy = 0;
+            System.out.println("Direction: WEST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+        }
+        if(m == Move.NORTH)        {
+            dx = 0;
+            dy = delta_kms;
+            System.out.println("Direction: NORTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+
+        }
+        if(m == Move.SOUTH)        {
+            dx = 0;
+            dy = -delta_kms;
+            System.out.println("Direction: SOUTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+
+        };
+//        origin = new Location (origin.x +	dx,origin.y + dy);
+        origin  = origin.moveBy(dx, dy);
     }
     @Override
     protected void onLoad(File stopFile, File tripFile) throws IOException {
         //create some error messages - not really needed as this is already done for us I see
         CheckDataFiles(stopFile, tripFile);
+
         // read data files
         ReadDataFiles r = new ReadDataFiles();
         stopsList = r.ReadStops(stopFile);
@@ -114,7 +125,7 @@ public class JourneyPlanner extends GUI {
         Trip lastTrip = tripsList.get(numTrips-1);
         int numLStops = lastTrip.tripSequence.size();
         Stop lastTripLastStop = lastTrip.tripSequence.get(numLStops - 1);
-        System.out.println("JP onLoad l 88 tripsList: Last trip " + lastTrip.trip_id + " has " + numLStops + " stops " + " the last stop is " +  lastTripLastStop.stop_id + " " + lastTripLastStop.stop_name);
+//        System.out.println("JP onLoad l 88 tripsList: Last trip " + lastTrip.trip_id + " has " + numLStops + " stops " + " the last stop is " +  lastTripLastStop.stop_id + " " + lastTripLastStop.stop_name);
 //        System.out.println("Finished dataImport tripFile and first element" + tripsList.get(0).tripSequence.get(0).stop_name + tripsList.get(numTrips -1).tripSequence.get(0) );
 
         //Create the edgeList and the Graph of stops and edges between stops

@@ -35,11 +35,10 @@ public class Graph {
                 Edge incomingEdge = e;
                 Stop incomingNeighbour = e.fromStop;
             }
-//            draw(g, highlightStop);
+        //            draw(g, highlightStop);
         }
-// Graph requires a draw method
     }
-
+    // Graph requires a draw method
     public void draw(Graphics g, Location origin, double scale) {
         for (Stop s: stopList)
         {

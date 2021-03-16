@@ -1,44 +1,69 @@
-//public class TrieNode {
-//    List <TrieNode> childNodes; //map array or whatever
-//    char object; //stores the word that we want to retrieve or null of its not a wod
-//}
-//public add(char[] word, Object obj) {
-//    for (c:
-//         word) {
-//        if (true) {
-//            //        if (c is not in childNodes )
-//            //            create a new child no node, connect to node via c
-//            move node to child corresponding to childcan 't foeraach loop'
+import java.util.LinkedList;
+import java.util.List;
+import java.util.HashMap;
+
+public class TrieNode {
+// from lecture notes
+        List<Object> objects; // in this case the objects are Strings (a word) ie a list of chars
+        HashMap<Character, TrieNode> children;
+// char word;
+//        boolean isEnd;
+//        int count;
+
+    public void add(char[] word, Object obj) {
+//            Set	node to	the	root	of	the	trie;
+        TrieNode node = null;
+//        for (c : word) {
+//                if (!node.children.containsValue(c) {
+//                    node.children = c;
+
+
+//                    create a new child of node, connecting to node via c
+//                    move node to the child corresponding to c;
+                }
+//            node.objects.add(obj)
+//            add	obj into	node.objects;
+
+//    public List<Object> get(char[] word) {
+//        Set	node to	the	root	of	the	trie;
+//        for (c : word) {
+//            if (node’s	children	do	not	contain	c)
+//            return null;
+//            move	node to	the	child	corresponding	to	c;
 //        }
-//        node.objects.add(c);  //add obj into node c
-//        ////flag when you reach a word with a boolean or with a String
-//        //       if you reach a whole word, set the String flag object to null, or to the word;
+//        return node.objects;
+
+//public List<Object> getAll(char[] prefix) {
+//    List<Object> results = new ArrayList<Object>();
+//    Set	node to	the	root	of	the	trie;
+//    for (c : prefix) {
+//        if (node’s	children	do	not	contain	c)
+//        return null;
+//        move	node to	the	child	corresponding	to	c;
 //    }
-//    public List,Object > get( char)word;
-//    {
-//        //set node to the root of the trie
-//        for (c:
-//             word) {
-//            if (false) {
-////            if(nodes children do not contain c)
-//                return null;
-//            } else {
-//                //(move node to the chid correspondng to c)
-//            }
+//    getAllFrom(node, results);
+//    return results;
+
+//public void getAllFrom(TrieNode node, List<Object> results) {
+//    add	node.objects into	results;
+//    for (each	child of	node)
+//    getAllFrom(child, results);
+
+//        /* Constructor */
+//        public TrieNode(char c)
+//        {
+//            childList = new LinkedList<TrieNode>();
+//            isEnd = false;
+//            data = c;
+//            count = 0;
 //        }
-//        return result
-//    }
-//    publi List ,Object. getAll(char){
-//
-//    }
-//
-//    public void getAllFrom(TrieNode node, List<Object>results) {
-//        results.add(node.objects)
-//                for each child of node {
-//                    getAllFrom(Child)
+//        public TrieNode getChild(char c)
+//        {
+//            if (childList != null)
+//                for (TrieNode eachChild : childList)
+//                    if (eachChild.data == c)
+//                        return eachChild;
+//            return null;
 //        }
 //    }
-//}
-////call the TrieNode Stops, or string list of stop names etc or Stop objects
-//
-// Watch YouTube tells you step by step how to write Dijkstra's algorithm
+}

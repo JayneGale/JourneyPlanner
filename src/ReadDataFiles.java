@@ -67,15 +67,17 @@ public class ReadDataFiles {
                 if (ydisttemp < ydistmin) {
                     ydistmin = ydisttemp;
                 }
-
                 stopsList.add(stop);
 //                System.out.println("Stop " + stop.stop_name + stop.stop_xy);
                 i++;
             }
         }
-        System.out.println("Max x kms: " + max_xdist + " Max y kms: " + max_ydist);
-        System.out.println("X kms from: " + xdistmin + " to: " + xdistmax + " Y kms: " + ydistmin + " to: " + ydistmax);
-// so the map is centred on CENTRE MAP and is about ~40km wide and ~32km high
+            double mapWidthKms = xdistmax - xdistmin;
+            double mapHeightKms = ydistmax - ydistmin;
+            System.out.println("Max x kms: " + max_xdist + " Max y kms: " + max_ydist);
+            System.out.println("X kms from: " + xdistmin + " to: " + xdistmax + " Y kms: " + ydistmin + " to: " + ydistmax);
+            System.out.println("Map width: " + mapWidthKms + " Map height: " + mapHeightKms);
+            // so the map is centred on CENTRE MAP and is about ~40km wide and ~32km high
             // for an 800 x 800 pixel window that is a scale of 800/40 = 20 pixels per km
             //Zooming in to an area 20km wide would mean a scale of 800/20 = 40 pixels per km
             return stopsList;

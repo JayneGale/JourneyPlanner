@@ -3,7 +3,6 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 import java.awt.Point;
 
 public class JourneyPlanner extends GUI {
@@ -11,20 +10,26 @@ public class JourneyPlanner extends GUI {
     public List<Trip> tripsList = new ArrayList<>();
     public List<Edge> edgeList = new ArrayList<>(); // directed edges
     public Graph graph = new Graph(stopsList, edgeList);
-    public Location origin = new Location (-40,16);
-    public double scale = 20;
+    public Dimension mapDim = getDrawingAreaDimension();
+    //work out which is harder to fit, the map width or height
+    // screen width / map width gives pixels / km
+    public double ZOOM_FACTOR = 1.4;
     public double dx = 0;
     public double dy = 0;
-    // if there exists a stop sequence AB in any Tripsequence then the edge from A to B exists
-    // if there exists a stop sequence BA in any Tripsequence, the edge from B to A exists
-
+    double scale1 = mapDim.width / 38.92; // width of the screen vs width of the PT map in kms pixels per km
+    double scale2 = mapDim.height/ 31.82; // height of the screen vs height of the PT map pixels per km
+    public double scale = scale1; // default to width scale as likely best fit, can change to scale2 later if need
+    //Find the origin. Given the scale pixels/ km and the map centre xy in km, centre the map in the screen
+    //Map origin located ag minimum x location / scale and maximum x location / scale
+    public Location origin = new Location ( (-19.457), 15.909);
+//    public Location origin = new Location (-40,16);
     public JourneyPlanner() {
-        // do something
+        // middle of drawing area// do something
     }
     /** Backlog
-     * TO DO: Pan map
      * TO DO: Zoom map
      * TO DO: Display attributes of Stops on Map
+     *
      * Write report Wed 17 March
      * Submit midnight Wed 17 March
      * Nice to have: Completion
@@ -46,13 +51,13 @@ public class JourneyPlanner extends GUI {
      * Create the in and out adjacency Lists for each Stop
      * Create fromStop and toStop in the Trips structure
      * Centre map
+     * Pan map
      */
 
     @Override
     protected void redraw(Graphics g) {
 //        // TO DO: rewrite this class. Public transport class extends this GUI class.
         graph.draw(g, origin, scale);
-
     }
 
     @Override
@@ -77,6 +82,7 @@ public class JourneyPlanner extends GUI {
     @Override
     protected void onMove(Move m) {
         // from the lecture notes
+        //        for Pan
         // on any of the move arrows, we set a distance (eg dx = 10km) for each click on the arrow
         // for move, we move the origin
         //         dx = loc.x-origin.x;
@@ -86,13 +92,12 @@ public class JourneyPlanner extends GUI {
 
         double delta_kms = 10;
         if(m == Move.EAST)        {
-            dx = -delta_kms;
+            dx = delta_kms;
             dy = 0;
-            System.out.println("Direction: EAST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-
+//            System.out.println("Direction: EAST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
         };
         if(m == Move.WEST)        {
-            dx = delta_kms;
+            dx = -delta_kms;
             dy = 0;
             System.out.println("Direction: WEST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
         }
@@ -100,16 +105,67 @@ public class JourneyPlanner extends GUI {
             dx = 0;
             dy = delta_kms;
             System.out.println("Direction: NORTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-
         }
         if(m == Move.SOUTH)        {
             dx = 0;
             dy = -delta_kms;
             System.out.println("Direction: SOUTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+        };
+
+//        Zoom
+//        Calculate width and height in km
+        //Pixel dimensions
+        int widthScr = getDrawingAreaDimension().width;
+        int heightScr = getDrawingAreaDimension().height;
+        Point botLeft = new Point(0, 0);
+        Point topLeft = new Point(0, heightScr);
+        Point botRight = new Point(widthScr, 0);
+        Point topRight = new Point(widthScr, heightScr);
+// check some parameters
+        Point middleScr = new Point ((int)((topRight.x - topLeft.x)/2.0f), (int)((topLeft.y - botLeft.y)/2.0f));
+        Point mapCentreScr = Location.mapCentre_xy.asPoint(origin, scale);
+        System.out.println("middleScr " + middleScr + "  and map centre " + mapCentreScr);
+        System.out.println("Drawing dimensions: widthScr " + widthScr + "  and heightScr " + heightScr + " topLeft " + topLeft + " + topRight " + topRight + " botLeft " + botLeft + " botRight " + botRight);
+// Now work out dimensions in kms
+        Location topLeftKms = Location.newFromPoint(topLeft, origin, scale);
+        Location topRightKms = Location.newFromPoint(topRight, origin, scale);
+        Location botLeftKms = Location.newFromPoint(botLeft, origin, scale);
+//        Location botRightKms = Location.newFromPoint(botRight, origin, scale);
+//        Location middleKms = new Location ((topRightKms.x - topLeftKms.x)/2.0f, (botLeftKms.y - topLeftKms.y)/2.0f); // may be reversed for u to y
+//        System.out.println("Km dimensions: middleKms" + middleKms + " topLeft x " + topLeftKms.x + " y " + topLeftKms.y + " topRight " + topRightKms + " botLeft " + botLeftKms + " botRight " + botRightKms);
+        double widthKms = topRightKms.x - topLeftKms.x;
+        double heightKms = botLeftKms.y - topLeftKms.y;
+        System.out.println("Km dimensions: width " + widthKms + " height " + heightKms);
+
+        if(m == Move.ZOOM_IN)        {
+            //– Zoom-in: increase scale
+            scale = scale * ZOOM_FACTOR;
+            //Zoom in change the origin - see fewer kms
+            double newwidthKms = widthKms/ZOOM_FACTOR;
+            double newheightKms = heightKms/ZOOM_FACTOR;
+            dx = (widthKms - newwidthKms)/2.0f;
+            dy = (heightKms - newheightKms)/2.0f;
+            System.out.println("Direction: ZOOM IN: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
+            widthKms = newwidthKms;
+            heightKms = newheightKms;
+        };
+        if(m == Move.ZOOM_OUT)        {
+            //– Zoom-out: increase scale - you see more kms
+            scale = scale / ZOOM_FACTOR;
+            //Zoom out change the origin - move it outwards ie negative
+            double newwidthKms = widthKms*ZOOM_FACTOR;
+            double newheightKms = heightKms*ZOOM_FACTOR;
+            dx = (widthKms - newwidthKms)/2.0f;
+            dy = (heightKms - newheightKms)/2.0f;
+            // these should both be negative for zoom out
+            System.out.println("Direction: ZOOM OUT: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
+            widthKms = newwidthKms;
+            heightKms = newheightKms; //hmm why is this not used again?
 
         };
-//        origin = new Location (origin.x +	dx,origin.y + dy);
         origin  = origin.moveBy(dx, dy);
+        System.out.println("Line 173 JP New origin " + origin + " scale " + scale);
+
     }
     @Override
     protected void onLoad(File stopFile, File tripFile) throws IOException {
@@ -149,6 +205,8 @@ public class JourneyPlanner extends GUI {
 //        String name = firstStop.stop_name;
 //        String neighbour = stopsList.get(0).adjListOutgoing.get(0).toStop.stop_name;
 //        System.out.println("Finished MakeMap CreateGraph " + name + neighbour);
+//         trieStopNames = new TrieNode;
+
     }
     private void CheckDataFiles(File stopFile, File tripFile) {
         String text1 = "stopFile not found";
@@ -171,7 +229,6 @@ public class JourneyPlanner extends GUI {
             getTextOutputArea().setText(text1 + text2 + text3 + text4);
         }
     }
-
     public static void main(String[] args) {
         new JourneyPlanner();
     }

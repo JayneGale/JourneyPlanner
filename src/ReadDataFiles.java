@@ -8,7 +8,6 @@ import java.lang.Math;
 public class ReadDataFiles {
 
         public List<Stop> ReadStops(File stopfile) throws IOException {
-        //            System.out.println("Started dataImport Stops Method");
         BufferedReader br = new BufferedReader(new FileReader(stopfile));
         String line;
         double stop_lat;
@@ -108,14 +107,16 @@ public class ReadDataFiles {
                 String trip_id = stringLine[0];
 //               create a list of Stops from this String sequence of stop_ids for this trip_id
                 List<Stop> tripSequence = new ArrayList<>();
+
 //              Could add error message if the stop_id is not found in the stopsList or add unknown stop eg
 //              Stop unknownStop = new Stop (null, "unknown",
 //                        0,0, null, null, null);
                 // the number of stops in the trip sequence is the length of the string minus the first item, the the trip_id
+
                 int numStops = stringLine.length - 1;
 //                System.out.println("Trip " + trip_id + " First Stop " + stringLine[1]  + " Last Stop " + stringLine[numStops] + " No. stops " + numStops);
+//                stringline[1] to stringLine[numStops] inclusive should be a stop id. If so, add that stop to the trip sequence
                 for (int j = 1; j < stringLine.length; j++){
-                    //stringline[1] to stringLine[numStops] inclusive should be a stop id. If so, add that stop to the trip sequence
                     for (Stop s : stopsList){
                         if(stringLine[j].equals(s.stop_id)){
 //                            System.out.println("s.stop_id = " + s.stop_id + " Stop name " + s.stop_name);
@@ -123,6 +124,7 @@ public class ReadDataFiles {
                         }
                     }
                 }
+
                 // put that trip_id and Stop sequence into a Trip structure
                 firstStop = tripSequence.get(0);
                 lastStop = tripSequence.get(numStops-1);

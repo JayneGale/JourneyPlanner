@@ -43,10 +43,10 @@ public class MakeMap {
                 }
             }
         }
-        int numEdges = edgeList.size();
-        System.out.println("ln 44 MakeMap CreateEdgeList finished, there are " + numEdges + "edges in the list.");
-        if (numEdges > 0)
-                System.out.println("Ln 46 makeMap the First Edge is from " + edgeList.get(0).fromStop.stop_name + " to " + edgeList.get(0).fromStop.stop_name + ". The Last Edge is from " + edgeList.get(numEdges-1).fromStop.stop_name + " to " + edgeList.get(numEdges-1).toStop.stop_name) ;
+//        int numEdges = edgeList.size();
+//        System.out.println("ln 44 MakeMap CreateEdgeList finished, there are " + numEdges + "edges in the list.");
+//        if (numEdges > 0)
+//                System.out.println("Ln 46 makeMap the First Edge is from " + edgeList.get(0).fromStop.stop_name + " to " + edgeList.get(0).toStop.stop_name + ". The Last Edge is from " + edgeList.get(numEdges-1).fromStop.stop_name + " to " + edgeList.get(numEdges-1).toStop.stop_name) ;
         return edgeList;
     }
 

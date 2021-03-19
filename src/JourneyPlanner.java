@@ -200,6 +200,8 @@ public class JourneyPlanner extends GUI {
         }
         List<char[]> stopsAsChar =  new ArrayList<>();
         stopsAsChar = t.NamestoCharArrays(stopNames);
+//        System.out.println("JP 203 stopsasChar length "  + stopsAsChar.size() + " stopsList length " + stopsList.size());
+
 //        char line_1 = stopsAsChar.get(0)[0];
 //        System.out.println("JP 203 stopNames"  + stopNames.size() + " and stopsAsChar first element " + line_1);
 
@@ -211,12 +213,19 @@ public class JourneyPlanner extends GUI {
         //        boolean listworks = edgeList.contains(MandorahCullen);
         //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
         //        ...and damn the boolean shows that edgeList doesn't contain Mandorah to Cullen Bay even though the Edge is in there
+//        Create a short list to test adding to the Trie
         List<char[]> shortList =  new ArrayList<>();
         int num = stopsAsChar.size();
         shortList.add(stopsAsChar.get(0));
         shortList.add(stopsAsChar.get(num - 1));
-        System.out.println("JP 2018 shortList 0 first letter "  + shortList.get(0)[0] + " shortList  1 " + shortList.get(1)[0]+ shortList.get(1).length);
-
+//        System.out.println("JP 220 shortList 0 first letter Casuarina "  + shortList.get(0)[0] + " shortList  1 Gurd " + shortList.get(1)[0]+ shortList.get(1).length);
+        TrieNode root = new TrieNode();
+        for (char[] n : shortList){
+            t.addName(n, root);
+            for (char letter : n){
+                System.out.println(" Letter added " + n[letter]);
+            }
+        }
         graph = map.CreateGraph(stopsList, edgeList);
 //        Stop firstStop = stopsList.get(0);
 //        String name = firstStop.stop_name;

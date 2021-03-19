@@ -3,6 +3,7 @@ import java.lang.*;
 public class TrieNode {
 // this is a TrieNode based on the lowercase alphabet a - z an some special characters
     HashMap<Character, TrieNode> child;
+    static final int alphabetsize = 39; // 26 lower case letters, 10 numerals 0-9, and special characters space, ' and &
     boolean isLast = false;
     List<String> names; // in this case the objects are Strings (names of stops or trips)
 
@@ -30,8 +31,15 @@ public class TrieNode {
         // call this for each name in names, after converting names using NamestoCharArrays
         // the object stored is name, the String, but the children are the chars
         child = new HashMap<Character, TrieNode>();
-
         //first step; initialise root TrieNodes to null
+
+//        how to declare a hashmap
+//        public static void main(String args[]){
+//   HashMap<Integer,String> map=new HashMap<Integer,String>();//Creating HashMap
+//   map.put(1,"Mango");  //Put elements in Map
+//   map.put(2,"Apple");
+//   map.put(3,"Banana");
+//   map.put(4,"Grapes");
         for (char i = 'a'; i <= 'z'; i++){
             child.put(i, null); // this sets all children of lower case alphabetic HashMap Key to null
         }
@@ -47,9 +55,8 @@ public class TrieNode {
 
         //now store the first char element c to be the new child and remove it from the nameAsChar array
         char c = nameAsChar[0];
-
         // found this way to remove the first element from the array source https://stackoverflow.com/questions/3663944/what-is-the-best-way-to-remove-the-first-element-from-an-array
-        char[] clippedName = null;
+        char[] clippedName = new char[len - 1];
         System.arraycopy(nameAsChar,1,clippedName,0,len -1);
         TrieNode current = root;
         for (char each : nameAsChar) {

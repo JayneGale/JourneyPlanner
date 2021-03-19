@@ -9,7 +9,7 @@ public class TrieNode {
 //    a helper function to convert the name List to a List of Char Arrays
     public List<char[]>NamestoCharArrays(List<String> names) {
         // Convert the String lists ( of stop and trip names) to a list of lowercase char arrays
-        List<char[]> namesAsChar = null;
+        List<char[]> namesAsChar = new ArrayList<>();
         for (String n : names) {
             int nameLength = n.length();
             char[] nameAsChar = n.toCharArray();

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
+import java.lang.*;
 
 public class JourneyPlanner extends GUI {
     public List<Stop> stopsList = new ArrayList<>();
@@ -112,10 +113,9 @@ public class JourneyPlanner extends GUI {
             dy = -delta_kms;
             System.out.println("Direction: SOUTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
         };
-
 //        Zoom
 //        Calculate width and height in km
-        //Pixel dimensions
+        // x y dimensions change not Pixel dimensions
         int widthScr = getDrawingAreaDimension().width;
         int heightScr = getDrawingAreaDimension().height;
         Point botLeft = new Point(0, 0);
@@ -189,6 +189,19 @@ public class JourneyPlanner extends GUI {
         edgeList = map.CreateEdgeList(tripsList, stopsList);
         System.out.println("JP ln 95 check adjLists exist look at the first stop name");
         System.out.println(stopsList.get(0).stop_name);
+        TrieNode t = new TrieNode();
+        List<String> stopNames = new ArrayList<>();
+        for (int i = 0; i < stopsList.size(); i++) {
+            String name = stopsList.get(i).stop_name;
+            stopNames.add(name);
+//            if (i == 0){
+//                System.out.println("JP 199 stopnames " + stopNames.get(0));
+//            }
+        }
+        List<char[]> stopsAsChar =  new ArrayList<>();
+        stopsAsChar = t.NamestoCharArrays(stopNames);
+//        char line_1 = stopsAsChar.get(0)[0];
+//        System.out.println("JP 203 stopNames"  + stopNames.size() + " and stopsAsChar first element " + line_1);
 
 //        stopsList = m.CreateAdjacencyLists(edgeList, stopsList);
         // test an Edge that should exist exists
@@ -198,15 +211,18 @@ public class JourneyPlanner extends GUI {
         //        boolean listworks = edgeList.contains(MandorahCullen);
         //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
         //        ...and damn the boolean shows that edgeList doesn't contain Mandorah to Cullen Bay even though the Edge is in there
+        List<char[]> shortList =  new ArrayList<>();
+        int num = stopsAsChar.size();
+        shortList.add(stopsAsChar.get(0));
+        shortList.add(stopsAsChar.get(num - 1));
+        System.out.println("JP 2018 shortList 0 first letter "  + shortList.get(0)[0] + " shortList  1 " + shortList.get(1)[0]+ shortList.get(1).length);
 
         graph = map.CreateGraph(stopsList, edgeList);
-
 //        Stop firstStop = stopsList.get(0);
 //        String name = firstStop.stop_name;
 //        String neighbour = stopsList.get(0).adjListOutgoing.get(0).toStop.stop_name;
 //        System.out.println("Finished MakeMap CreateGraph " + name + neighbour);
 //         trieStopNames = new TrieNode;
-
     }
     private void CheckDataFiles(File stopFile, File tripFile) {
         String text1 = "stopFile not found";

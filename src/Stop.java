@@ -13,9 +13,9 @@ public class Stop {
     public List<Edge> adjListOutgoing;
     public List<Trip> tripsthruStop;
 
-    public Stop(String stop_id, String stop_name, double stop_lat, double stop_lon, Location stop_xy, List<Edge> adjListIncoming, List<Edge> adjListOutgoing, List<Trip> tripsthruStop) {
+    public Stop(String stop_id, String name, double stop_lat, double stop_lon, Location stop_xy, List<Edge> adjListIncoming, List<Edge> adjListOutgoing, List<Trip> tripsthruStop) {
         this.stop_id = stop_id;
-        this.stop_name = stop_name;
+        this.stop_name = name;
         this.stop_lat = stop_lat;
         this.stop_lon = stop_lon;
         this.stop_xy = stop_xy;

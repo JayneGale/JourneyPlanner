@@ -171,6 +171,7 @@ public class JourneyPlanner extends GUI {
     @Override
     protected void onLoad(File stopFile, File tripFile) throws IOException {
         //create some error messages - not really needed as this is already done for us I see
+//        System.out.println("Started onLoad");
         CheckDataFiles(stopFile, tripFile);
         // read data files
         ReadDataFiles r = new ReadDataFiles();
@@ -187,23 +188,7 @@ public class JourneyPlanner extends GUI {
         //Create the edgeList and the Graph of stops and edges between stops
         MakeMap map = new MakeMap();
         edgeList = map.CreateEdgeList(tripsList, stopsList);
-        System.out.println("JP ln 95 check adjLists exist look at the first stop name");
-        System.out.println(stopsList.get(0).stop_name);
-        TrieNode t = new TrieNode();
-        List<String> stopNames = new ArrayList<>();
-        for (int i = 0; i < stopsList.size(); i++) {
-            String name = stopsList.get(i).stop_name;
-            stopNames.add(name);
-//            if (i == 0){
-//                System.out.println("JP 199 stopnames " + stopNames.get(0));
-//            }
-        }
-        List<char[]> stopsAsChar =  new ArrayList<>();
-        stopsAsChar = t.NamestoCharArrays(stopNames);
-//        System.out.println("JP 203 stopsasChar length "  + stopsAsChar.size() + " stopsList length " + stopsList.size());
-
-//        char line_1 = stopsAsChar.get(0)[0];
-//        System.out.println("JP 203 stopNames"  + stopNames.size() + " and stopsAsChar first element " + line_1);
+//        System.out.println(stopsList.get(0).stop_name);
 
 //        stopsList = m.CreateAdjacencyLists(edgeList, stopsList);
         // test an Edge that should exist exists
@@ -212,21 +197,34 @@ public class JourneyPlanner extends GUI {
         //        Edge MandorahCullen = new Edge (Mandorah, Cullen);
         //        boolean listworks = edgeList.contains(MandorahCullen);
         //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
-        //        ...and damn the boolean shows that edgeList doesn't contain Mandorah to Cullen Bay even though the Edge is in there
-//        Create a short list to test adding to the Trie
-        List<char[]> shortList =  new ArrayList<>();
-        int num = stopsAsChar.size();
-        shortList.add(stopsAsChar.get(0));
-        shortList.add(stopsAsChar.get(num - 1));
-//        System.out.println("JP 220 shortList 0 first letter Casuarina "  + shortList.get(0)[0] + " shortList  1 Gurd " + shortList.get(1)[0]+ shortList.get(1).length);
-        TrieNode root = new TrieNode();
-        for (char[] n : shortList){
-            t.addName(n, root);
-            for (char letter : n){
-                System.out.println(" Letter added " + n[letter]);
+        //        ...and damn the boolean shows that edgeList doesn't_stops contain Mandorah to Cullen Bay even though the Edge is in there
+//        Now set up the TrieNode structure and put all the stop names into it
+
+        // Add all the stop names to Trie structures by iterating through the TrieNodeActions on the Stopnames and Tripnames
+
+        TrieNodeActions t_stops = new TrieNodeActions();
+        for (Stop s : stopsList){
+            String n = s.stop_name;
+            t_stops.addName(n);
             }
+
+        TrieNodeActions t_trips = new TrieNodeActions();
+        for (Trip t : tripsList){
+            String n = t.name;
+            t_trips.addName(n);
         }
+
+        //Now all the stop and trip names are in a Trie structure
+        // And I can search for a Boolean is it there or not - so now have to work out how to return a name and allNames
+//        int num = tripsList.size();
+//        String testname = tripsList.get(0).name;
+//        System.out.println("JP ln 219 " + num);
+//        System.out.println("JP ln 221 first trip name : "  + testname);
+//        boolean isTripnameInTrie = t_trips.search(testname);
+//        System.out.println("JP ln 221 see if Trip name " + testname + " is in the Trie : "  + isTripnameInTrie);
+
         graph = map.CreateGraph(stopsList, edgeList);
+
 //        Stop firstStop = stopsList.get(0);
 //        String name = firstStop.stop_name;
 //        String neighbour = stopsList.get(0).adjListOutgoing.get(0).toStop.stop_name;
@@ -238,8 +236,6 @@ public class JourneyPlanner extends GUI {
         String text3 = " and tripFile not found";
         String text2 = " stopFile is not readable";
         String text4 = " tripFile is not readable";
-        System.out.println("Started onLoad");
-
         if (stopFile.exists()) {
             text1 = stopFile.getName() + " is loaded";
             if (stopFile.canRead()) {

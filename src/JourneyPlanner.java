@@ -214,14 +214,16 @@ public class JourneyPlanner extends GUI {
             t_trips.addName(n);
         }
 
-        //Now all the stop and trip names are in a Trie structure
-        // And I can search for a Boolean is it there or not - so now have to work out how to return a name and allNames
-//        int num = tripsList.size();
-//        String testname = tripsList.get(0).name;
-//        System.out.println("JP ln 219 " + num);
-//        System.out.println("JP ln 221 first trip name : "  + testname);
-//        boolean isTripnameInTrie = t_trips.search(testname);
-//        System.out.println("JP ln 221 see if Trip name " + testname + " is in the Trie : "  + isTripnameInTrie);
+//        Now all the stop and trip names are in a Trie structure
+//         And I can search for a Boolean is it there or not - so now have to work out how to return a name and allNames
+        int num = tripsList.size();
+        String testname = stopsList.get(66).stop_name;
+        System.out.println("JP ln 219 " + num);
+        System.out.println("JP ln 221 stop 66 name : "  + testname);
+        boolean isTripnameInTrie = t_stops.searchBool(testname);
+        System.out.println("JP ln 225 see if stop 66  " + testname + " is in the Trie : "  + isTripnameInTrie);
+        String istestName  = t_stops.searchName(testname);
+        System.out.println("JP ln 225 see if I can get out stop 66 name  " + istestName);
 
         graph = map.CreateGraph(stopsList, edgeList);
 

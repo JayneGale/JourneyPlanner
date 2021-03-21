@@ -3,10 +3,11 @@ import java.lang.*;
 public class TrieNode {
     // this is a TrieNode based on the lowercase alphabet a - z an some special characters
     HashMap<Character, TrieNode> child = new HashMap<>();
-    static final int alphabetsize = 39; // 26 lower case letters, 10 numerals 0-9, and special characters space, ' and &
+//    static final int alphabetsize = 39; // 26 lower case letters, 10 numerals 0-9, and special characters space, ' and &
     boolean isLast = false;
+    String name;
     char c;
-//    List<String> names; // in this case the objects are Strings (names of stops or trips)
+    List<String> results; // in this case the objects are Strings (names of stops or trips)
 
     //constructor for TrieNode from  https://medium.com/@amogh.avadhani/how-to-build-a-trie-tree-in-java-9d144aaa0d01
     public TrieNode() {
@@ -15,7 +16,6 @@ public class TrieNode {
     public TrieNode(char c) {
         this.c = c;
     }
-
     public HashMap<Character, TrieNode> GetChild() {
         return child;
     }
@@ -23,12 +23,21 @@ public class TrieNode {
     public void setChild(HashMap<Character, TrieNode> child) {
         this.child = child;
     }
+
     public boolean isLast() {
         return isLast;
     }
     public void setLast(boolean isLast) {
         this.isLast = isLast;
     }
+
+    public String getName(String name) {return name; }
+    public void setName(String name) {this.name = name; }
+
+    public List<String> getResults( String prefix) {return results; }
+//    public void setResults( List<String> results) {this.results = results; }
+
+
 }
 
 

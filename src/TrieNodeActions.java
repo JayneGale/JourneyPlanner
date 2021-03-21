@@ -8,18 +8,6 @@ public class TrieNodeActions {
         root = new TrieNode();
         }
 
-//        public void InitialiseTrie (){
-//        root = new TrieNode();
-//            HashMap<Character, TrieNode> child = root.GetChild();
-//            for (char i = 'a'; i <= 'z'; i++){
-//                child.put(i, null); // this sets all children of lower case alphabetic HashMap Key to null
-//            }
-//            child.put(' ', null); // this adds the special character space
-//            child.put('&', null); // this adds the special character &
-//            child.put('\'', null); // this adds the special character ' (escaped
-//            root.isLast = false;
-//        }
-
     // Extensively used this really helpful Trie tutorial by Amogh Avadhani:
     // https://medium.com/@amogh.avadhani/how-to-build-a-trie-tree-in-java-9d144aaa0d01
 // Pseudocode from lecture 2
@@ -53,13 +41,14 @@ public class TrieNodeActions {
                     // once reach the last char iin the word, flag it as the word (set last to true)
                     if (i == name.length() - 1) {
                         tnode.setLast(true);
+                        tnode.setName(name);
                         // store the name object // can I store the Stop or Trip object? and access stop_name String name as the object in the Trie at this node
                     }
                 }
             }
         }
 
-    public boolean search(String name) {
+    public boolean searchBool(String name) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
         for(int i = 0; i < name.length(); i++) {
@@ -81,7 +70,30 @@ public class TrieNodeActions {
         }
     }
 
+    public String searchName(String name) {
+        HashMap<Character, TrieNode> child = root.GetChild();
+        TrieNode tnode = null;
+        for(int i = 0; i < name.length(); i++) {
+            char c = name.charAt(i);
+            if(child.containsKey(c)) {
+                tnode = child.get(c);
+                child = tnode.GetChild();
+            }
+            else {
+                tnode = null;
+                break;
+            }
+        }
+        if(tnode != null && tnode.isLast()) {
+            return name;
+        }
+        else {
+            return null;
+        }
+    }
+
 //    Next make the get and getAll functions
+
 //    Pseudocode from lecture for get a word from a Trie
 //    public List<Object> get(char[] word) {
 //        Set	node to	the	root	of	the	trie;
@@ -101,7 +113,7 @@ public class TrieNodeActions {
 //}
 //    public void getAllFrom(TrieNode node, List<Object> results) {
 
-    public List<String> getAll(String prefix) {
+    public List<String> getResults(String prefix) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
         List<String> results = null;
@@ -123,21 +135,35 @@ public class TrieNodeActions {
                 break;
             }
         }
-//        add	node.objects into	results;
+
+//      from lecture notes:
+//      add	node.objects into	results;
 //        for (each	child of	node)
 //        getAllFrom(child, results);
 //    }
 //    public List<Object> getAll(String prefix) {
 
         if(tnode != null && tnode.isLast()) {
-//            up to here
-//            results.add(prefix);
-            return results;
+//            up to here - so we want to keep going down the tree to all the results under the prefix - iteratively
+            results.add(prefix);
         }
         else {
             return null;
         }
+        return results;
     }
+
+//        public void InitialiseTrie (){
+//        root = new TrieNode();
+//            HashMap<Character, TrieNode> child = root.GetChild();
+//            for (char i = 'a'; i <= 'z'; i++){
+//                child.put(i, null); // this sets all children of lower case alphabetic HashMap Key to null
+//            }
+//            child.put(' ', null); // this adds the special character space
+//            child.put('&', null); // this adds the special character &
+//            child.put('\'', null); // this adds the special character ' (escaped
+//            root.isLast = false;
+//        }
 
 }
 

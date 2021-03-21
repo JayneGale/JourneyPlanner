@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f72a1451-a433-47bf-a151-9a6f151778da" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TrieNodeActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/JourneyPlanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/JourneyPlanner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JourneyPlanner/TrieNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JourneyPlanner/TrieNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JourneyPlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TrieNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrieNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Trip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrieNodeActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrieNodeActions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

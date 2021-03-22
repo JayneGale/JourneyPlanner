@@ -23,6 +23,7 @@ public class JourneyPlanner extends GUI {
     //Find the origin. Given the scale pixels/ km and the map centre xy in km, centre the map in the screen
     //Map origin located ag minimum x location / scale and maximum x location / scale
     public Location origin = new Location ( (-19.457), 15.909);
+    public List<Character> charsInTrie = new ArrayList<>();
 //    public Location origin = new Location (-40,16);
     public JourneyPlanner() {
         // middle of drawing area// do something
@@ -176,9 +177,10 @@ public class JourneyPlanner extends GUI {
         // read data files
         ReadDataFiles r = new ReadDataFiles();
         stopsList = r.ReadStops(stopFile);
-//        System.out.println("Finished dataImport stopFile");
         tripsList = r.ReadTrips(tripFile, stopsList);
         int numTrips = tripsList.size();  // there are 101 trips
+
+// Check it all works
 //        Trip lastTrip = tripsList.get(numTrips-1);
 //        int numLStops = lastTrip.tripSequence.size();
 //        Stop lastTripLastStop = lastTrip.tripSequence.get(numLStops - 1);
@@ -188,7 +190,6 @@ public class JourneyPlanner extends GUI {
         //Create the edgeList and the Graph of stops and edges between stops
         MakeMap map = new MakeMap();
         edgeList = map.CreateEdgeList(tripsList, stopsList);
-//        System.out.println(stopsList.get(0).stop_name);
 
 //        stopsList = m.CreateAdjacencyLists(edgeList, stopsList);
         // test an Edge that should exist exists
@@ -198,32 +199,55 @@ public class JourneyPlanner extends GUI {
         //        boolean listworks = edgeList.contains(MandorahCullen);
         //        System.out.println("JP ln 95 Finished MakeMap edgeFile " + listworks);
         //        ...and damn the boolean shows that edgeList doesn't_stops contain Mandorah to Cullen Bay even though the Edge is in there
+
 //        Now set up the TrieNode structure and put all the stop names into it
 
         // Add all the stop names to Trie structures by iterating through the TrieNodeActions on the Stopnames and Tripnames
-
         TrieNodeActions t_stops = new TrieNodeActions();
         for (Stop s : stopsList){
             String n = s.stop_name;
             t_stops.addName(n);
+            // creating a complete list of characters in the Trie for searching later
+            if(n.length() != 0){
+                for (int i = 0; i < n.length(); i++){
+                    char c = n.charAt(i);
+                    if (!charsInTrie.contains(c)){
+                        charsInTrie.add(c);
+                        System.out.println("Character added " + c + " for stopList "  + n);
+                    }
+                }
             }
+        }
 
         TrieNodeActions t_trips = new TrieNodeActions();
         for (Trip t : tripsList){
             String n = t.name;
             t_trips.addName(n);
+            if(n.length() != 0){
+                for (int i = 0; i < n.length(); i++){
+                    char c = n.charAt(i);
+                    if (!charsInTrie.contains(c)){
+                        charsInTrie.add(c);
+//                        System.out.println("Character added " + c + " for tripList "  + n);
+                    }
+                }
+            }
+            System.out.println("JP 218 onLoad num chars in Trie " + charsInTrie.size());
         }
+        List<String> results = t_stops.getAllFromPrefix("Cas", charsInTrie);
 
 //        Now all the stop and trip names are in a Trie structure
-//         And I can search for a Boolean is it there or not - so now have to work out how to return a name and allNames
-        int num = tripsList.size();
-        String testname = stopsList.get(66).stop_name;
-        System.out.println("JP ln 219 " + num);
-        System.out.println("JP ln 221 stop 66 name : "  + testname);
-        boolean isTripnameInTrie = t_stops.searchBool(testname);
-        System.out.println("JP ln 225 see if stop 66  " + testname + " is in the Trie : "  + isTripnameInTrie);
-        String istestName  = t_stops.searchName(testname);
-        System.out.println("JP ln 225 see if I can get out stop 66 name  " + istestName);
+//        And I can search for a Boolean is it there or not and retrieve a name from the Trie
+//        Test it out //        int num = tripsList.size();
+//        String testname = stopsList.get(66).stop_name;
+//        System.out.println("JP ln 219 " + num);
+//        System.out.println("JP ln 221 stop 66 name : "  + testname);
+//        boolean isTripnameInTrie = t_stops.searchBool(testname);
+//        System.out.println("JP ln 225 see if stop 66  " + testname + " is in the Trie : "  + isTripnameInTrie);
+//        String istestName  = t_stops.searchName(testname);
+//        System.out.println("JP ln 225 see if I can get out stop 66 name  " + istestName);
+//
+//        So now to return allNames under a given node
 
         graph = map.CreateGraph(stopsList, edgeList);
 

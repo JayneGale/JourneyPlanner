@@ -2,13 +2,16 @@ import java.util.*;
 import java.lang.*;
 public class TrieNodeActions {
     private TrieNode root;
+    private ArrayList<Character> charsInTrie;
 
     //first step; initialise root TrieNodes to null
-    public  TrieNodeActions() {
+    public TrieNodeActions() {
         root = new TrieNode();
-        }
-// These are all my TrieNode methods - add a stop or trip name to the trie
-    // check if a stop or tripname is in the tree,
+    }
+
+    // These are all my TrieNode methods
+// // add a stop or trip name to the trie
+    // check if a stop or tripname is in the tree
     // get a trip or stop name
     // Extensively used this really helpful Trie tutorial by Amogh Avadhani:
     // https://medium.com/@amogh.avadhani/how-to-build-a-trie-tree-in-java-9d144aaa0d01
@@ -22,55 +25,53 @@ public class TrieNodeActions {
 //        }
 //        add	obj into	node.objects;
 //    }
-        public void addName(String name) {
+    public void addName(String name) {
         // hmm can I addStop and access the Stop object.name
-            HashMap<Character, TrieNode> child = root.GetChild();
-            //next step, return if the word is null or we are at the end of the word
-            // skip if trying to add a null word
-            if (name.length() != 0) {
-                for (int i = 0; i < name.length(); i++ ) {
-                    //store the each char element c to be the new child until reach the end of the word
-                    char c = name.charAt(i);
-                    TrieNode tnode;
-                    if (child.containsKey(c)) {
-                        tnode = child.get(c);
-                    }
-                    else {
-                        tnode = new TrieNode(c);
-                        child.put(c, tnode);
-                    }
-                    child = tnode.GetChild();
-                    // once reach the last char iin the word, flag it as the word (set last to true)
-                    if (i == name.length() - 1) {
-                        tnode.setLast(true);
-                        tnode.setName(name);
-                        // store the name object // can I store the Stop or Trip object? and access stop_name String name as the object in the Trie at this node
-                    }
+        HashMap<Character, TrieNode> child = root.GetChild();
+        //next step, return if the word is null or we are at the end of the word
+        // skip if trying to add a null word
+        if (name.length() != 0) {
+            for (int i = 0; i < name.length(); i++) {
+                //store the each char element c to be the new child until reach the end of the word
+                char c = name.charAt(i);
+                TrieNode tnode;
+                if (child.containsKey(c)) {
+                    tnode = child.get(c);
+                } else {
+                    tnode = new TrieNode(c);
+                    child.put(c, tnode);
+                }
+                child = tnode.GetChild();
+                // once reach the last char iin the word, flag it as the word (set last to true)
+                if (i == name.length() - 1) {
+                    tnode.setLast(true);
+                    tnode.setName(name);
+                    // store the name object // can I store the Stop or Trip object? and access stop_name String name as the object in the Trie at this node
                 }
             }
         }
+    }
 
     public boolean searchBool(String name) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
-        for(int i = 0; i < name.length(); i++) {
+        for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
-            if(child.containsKey(c)) {
+            if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
-            }
-            else {
+            } else {
                 tnode = null;
                 break;
             }
         }
-        if(tnode != null && tnode.isLast()) {
+        if (tnode != null && tnode.isLast()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
     //next make the get function
 //    Pseudocode from lecture for get a word from a Trie
 //    public List<Object> get(char[] word) {
@@ -86,21 +87,20 @@ public class TrieNodeActions {
     public String searchName(String name) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
-        for(int i = 0; i < name.length(); i++) {
+
+        for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
-            if(child.containsKey(c)) {
+            if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
-            }
-            else {
+            } else {
                 tnode = null;
                 break;
             }
         }
-        if(tnode != null && tnode.isLast()) {
+        if (tnode != null && tnode.isLast()) {
             return name;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -116,32 +116,30 @@ public class TrieNodeActions {
 //    return results;
 //}
 
-    public List<String> getAllFromPrefix(String prefix) {
+    public List<String> getAllFromPrefix(String prefix, List<Character> charsInTrie) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
         List<String> results = null;
         String name = null;
-        // for c in prefix
 
-        for(int i = 0; i < prefix.length(); i++) {
+        // for c in prefix
+        for (int i = 0; i < prefix.length(); i++) {
             char c = prefix.charAt(i);
 //    for (c : prefix) {
 //        move	node to	the	child	corresponding	to	c;
 //    }
-            if(child.containsKey(c)) {
+            if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
                 // if the prefixeg Gurd 568 already contains a complete name eg Gurd, we don't want  Gurd to the list if they typ - oh wait, no
-                }
+            }
 //        else if (node’s	children	do	not	contain	c)
 //        return null;
             else {
                 tnode = null;
                 break;
             }
-
         }
-
 
 //      from lecture notes:
 //      add	node.objects into	results;
@@ -150,28 +148,52 @@ public class TrieNodeActions {
 //    }
 //    public List<Object> getAll(String prefix) {
 
-        if(tnode != null) {
+        if (tnode != null) {
             if (tnode.isLast()) {
 //            if the last char in the prefix is a complete name, add it to the list
                 results.add(prefix);
             }
-            // even if prefix is a name, keep going and find all the rest of the names  in the trie
-            getAll(tnode, results);
+            child = tnode.GetChild();
+            System.out.println("charsInTrie " + charsInTrie.size());
+            System.out.println("charsInTrie " + charsInTrie.get(0));
+// I am up to here
+            for (char c  : charsInTrie) {
+               getAll(child.get(c), results, charsInTrie);
+//            for (TrieNode  : charsInTrie) {
+//                tnode = child.get(c);
+//                child = tnode.GetChild();
+//                // even if prefix is a name, keep going and find all the rest of the names  in the trie
+//            getAll(child, results, charsInTrie);
+            }
         }
         return results;
     }
 
-    public void getAll(TrieNode tnode, List<String> results) {
-        if (tnode.isLast){
+    public void getAll(TrieNode tnode, List<String> results, List<Character> charsInTrie) {
+        if (tnode.isLast) {
             results.add(tnode.name);
+        }
+        // this is not else this is and, because we don't stop at this isLast
+        for (char c : charsInTrie) {
+            HashMap child = tnode.GetChild();
+            System.out.println("tnode " + tnode + child);
+//            if(child.containsKey(c)) {
+//                tnode = child.get(c);
+//                    getAll(, results, charsInTrie);
+//
+//                }
+//                tnode = child.get(c);
+//                child = tnode.GetChild();
+//                getAll(child, results, charsInTrie);
+
+            // if the prefixeg Gurd 568 already contains a complete name eg Gurd, we don't want  Gurd to the list if they typ - oh wait, n
         }
 //        for ( )
 //        children = tnode.GetChild();
 //        getAll(tnode.child, results);
 //        }
-
-        //TODO write a recursive method that returns every child from the tree below this node
     }
+}
 
 //        public void InitialiseTrie (){
 //        root = new TrieNode();
@@ -185,5 +207,4 @@ public class TrieNodeActions {
 //            root.isLast = false;
 //        }
 
-}
 

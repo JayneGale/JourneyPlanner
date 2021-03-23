@@ -12,6 +12,7 @@ public class JourneyPlanner extends GUI {
     public List<Edge> edgeList = new ArrayList<>(); // directed edges
     public Graph graph = new Graph(stopsList, edgeList);
     public Dimension mapDim = getDrawingAreaDimension();
+//    public int windowWidth = get
     //work out which is harder to fit, the map width or height
     // screen width / map width gives pixels / km
     public double ZOOM_FACTOR = 1.4;
@@ -76,7 +77,18 @@ public class JourneyPlanner extends GUI {
 //                squares.remove(i);
 //                break;
 //            }
-        System.out.println("A mouse click event occurred."); //yet to define which node
+        int i = stopsList.size();
+        for (Stop s : stopsList) {
+            if(s.containsPoint(e.getX(), e.getY(), origin, scale)){
+                s.isHighlighted = true;
+            }
+            else s.isHighlighted = false;
+//            if (e)
+//            if (squares.get(i).contains(e.getX(), e.getY())) {
+//                squares.remove(i);
+//                break;
+            }
+        System.out.println("A mouse click event occurred." + e.getX() + e.getY()); //yet to define which node
 //            getTextOutputArea().append("\nsquares remaining: ");
     }
 

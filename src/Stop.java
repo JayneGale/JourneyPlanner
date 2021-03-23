@@ -8,6 +8,8 @@ public class Stop {
     double stop_lat;
     double stop_lon;
     Location stop_xy;
+    int boxSize = 8;
+    int halfboxSize = boxSize/2;
     // TO DO: create adjacency lists from Trip sequences
     public List<Edge> adjListIncoming;
     public List<Edge> adjListOutgoing;
@@ -24,9 +26,20 @@ public class Stop {
         this.tripsthruStop = tripsthruStop;
     }
 
+    public boolean containsPoint(int screenX, int screenY, Location origin, double scale) {
+        Point xyPoint = stop_xy.asPoint(origin, scale);
+
+        if (screenX < xyPoint.x - halfboxSize || screenX > xyPoint.x + halfboxSize) {
+            return false;
+        }
+        //truth is whether its now in y limits
+        return (screenY >= xyPoint.y - halfboxSize && screenY <= xyPoint.y + halfboxSize);
+    }
+
     public void draw(Graphics g, Location origin, double scale) {
         Point xyPoint = stop_xy.asPoint(origin, scale);
-        g.fillRect(xyPoint.x, xyPoint.y, 4,4);
+        g.fillRect(xyPoint.x-halfboxSize, xyPoint.y-halfboxSize, boxSize, boxSize);
+        // Todo make box size a property of a stop and a public constant at the top of the Stop
     }
 }
 

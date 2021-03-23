@@ -7,7 +7,7 @@ public class TrieNode {
     boolean isLast = false;
     // this retrieves the object - currently either the stop_name or the trip_name but if I create a generic Type it could potentially retrieve the Stop or Trip object
     String name;
-    char c;
+    public char c;
     List<String> results; // in this case the objects are Strings (names of stops or trips)
 
     //constructor for TrieNode from  https://medium.com/@amogh.avadhani/how-to-build-a-trie-tree-in-java-9d144aaa0d01

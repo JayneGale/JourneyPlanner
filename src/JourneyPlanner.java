@@ -25,18 +25,18 @@ public class JourneyPlanner extends GUI {
     public Location origin = new Location ( (-19.457), 15.909);
     public List<Character> charsInTrie = new ArrayList<>();
 //    public Location origin = new Location (-40,16);
+
     public JourneyPlanner() {
-        // middle of drawing area// do something
+        // do something
     }
     /** Backlog
      * TO DO: Zoom map
      * TO DO: Display attributes of Stops on Map
      *
-     * Write report Wed 17 March
-     * Submit midnight Wed 17 March
+     * Write report Wed 24 March
+     * Submit midnight Wed 24 March
      * Nice to have: Completion
-     * Create Trie Structure for Stop names
-     * Implement Trie Structure#
+     * Implement Trie Structure prefix search#
      * Nice to have: Display attributes of Edges on Map
      * Nice to have: Refactor DrawStops methods into separate Classes; call the Classes from the JourneyPlannerMain Class Tue 16 March
      *
@@ -54,7 +54,8 @@ public class JourneyPlanner extends GUI {
      * Create fromStop and toStop in the Trips structure
      * Centre map
      * Pan map
-     * Start making addTrie function
+     * Start making addName Trie function
+     * Create Trie Structure for Stop names
      */
 
     @Override
@@ -94,26 +95,6 @@ public class JourneyPlanner extends GUI {
         //         orig.y = orig.y + dy;
 
         double delta_kms = 10;
-        if(m == Move.EAST)        {
-            dx = delta_kms;
-            dy = 0;
-//            System.out.println("Direction: EAST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-        };
-        if(m == Move.WEST)        {
-            dx = -delta_kms;
-            dy = 0;
-            System.out.println("Direction: WEST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-        }
-        if(m == Move.NORTH)        {
-            dx = 0;
-            dy = delta_kms;
-            System.out.println("Direction: NORTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-        }
-        if(m == Move.SOUTH)        {
-            dx = 0;
-            dy = -delta_kms;
-            System.out.println("Direction: SOUTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
-        };
 //        Zoom
 //        Calculate width and height in km
         // x y dimensions change not Pixel dimensions
@@ -137,34 +118,59 @@ public class JourneyPlanner extends GUI {
 //        System.out.println("Km dimensions: middleKms" + middleKms + " topLeft x " + topLeftKms.x + " y " + topLeftKms.y + " topRight " + topRightKms + " botLeft " + botLeftKms + " botRight " + botRightKms);
         double widthKms = topRightKms.x - topLeftKms.x;
         double heightKms = botLeftKms.y - topLeftKms.y;
+        double newwidthKms;
+        double newheightKms;
         System.out.println("Km dimensions: width " + widthKms + " height " + heightKms);
 
-        if(m == Move.ZOOM_IN)        {
-            //– Zoom-in: increase scale
-            scale = scale * ZOOM_FACTOR;
-            //Zoom in change the origin - see fewer kms
-            double newwidthKms = widthKms/ZOOM_FACTOR;
-            double newheightKms = heightKms/ZOOM_FACTOR;
-            dx = (widthKms - newwidthKms)/2.0f;
-            dy = (heightKms - newheightKms)/2.0f;
-            System.out.println("Direction: ZOOM IN: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
-            widthKms = newwidthKms;
-            heightKms = newheightKms;
-        };
-        if(m == Move.ZOOM_OUT)        {
-            //– Zoom-out: increase scale - you see more kms
-            scale = scale / ZOOM_FACTOR;
-            //Zoom out change the origin - move it outwards ie negative
-            double newwidthKms = widthKms*ZOOM_FACTOR;
-            double newheightKms = heightKms*ZOOM_FACTOR;
-            dx = (widthKms - newwidthKms)/2.0f;
-            dy = (heightKms - newheightKms)/2.0f;
-            // these should both be negative for zoom out
-            System.out.println("Direction: ZOOM OUT: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
-            widthKms = newwidthKms;
-            heightKms = newheightKms; //hmm why is this not used again?
-
-        };
+        switch(m) {
+            case EAST:
+                dx = delta_kms;
+                dy = 0;
+//            System.out.println("Direction: EAST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+                break;
+            case WEST:
+                dx = -delta_kms;
+                dy = 0;
+                System.out.println("Direction: WEST" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+                break;
+            case NORTH:
+                dx = 0;
+                dy = delta_kms;
+//                System.out.println("Direction: NORTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+                break;
+            case SOUTH:
+                dx = 0;
+                dy = -delta_kms;
+//                System.out.println("Direction: SOUTH" + " dx " + dx + " dy " + dy + " new origin: x " + origin.x + " y " +origin.y);
+                break;
+            case ZOOM_IN:
+                //– Zoom-in: increase scale
+                scale = scale * ZOOM_FACTOR;
+                //Zoom in change the origin - see fewer kms
+                newwidthKms = widthKms/ZOOM_FACTOR;
+                newheightKms = heightKms/ZOOM_FACTOR;
+                dx = (widthKms - newwidthKms)/2.0f;
+                dy = (heightKms - newheightKms)/2.0f;
+                System.out.println("Direction: ZOOM IN: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
+                widthKms = newwidthKms;
+                heightKms = newheightKms;
+                break;
+            case ZOOM_OUT:
+                //– Zoom-out: increase scale - you see more kms
+                scale = scale / ZOOM_FACTOR;
+                //Zoom out change the origin - move it outwards ie negative
+                newwidthKms = widthKms*ZOOM_FACTOR;
+                newheightKms = heightKms*ZOOM_FACTOR;
+                dx = (widthKms - newwidthKms)/2.0f;
+                dy = (heightKms - newheightKms)/2.0f;
+                // these should both be negative for zoom out
+                System.out.println("Direction: ZOOM OUT: widthKms: " + widthKms + " newwidthKms: " + newwidthKms + " dx " + dx + " dy " + dy + " old origin: " + origin + " scale " + scale);
+                widthKms = newwidthKms;
+                heightKms = newheightKms; //hmm why is this not used again?
+                break;
+            default:
+                // code block
+        }
         origin  = origin.moveBy(dx, dy);
         System.out.println("Line 173 JP New origin " + origin + " scale " + scale);
 
@@ -207,13 +213,14 @@ public class JourneyPlanner extends GUI {
         for (Stop s : stopsList){
             String n = s.stop_name;
             t_stops.addName(n);
-            // creating a complete list of characters in the Trie for searching later
+            // creating a complete list of characters in the Trie for the prefix search
+            // If I get time I could reduce the span of the trie by 23 (up to 26 by making all the stop_name chars toLower in the Trie but retrieving the full name in the Get
             if(n.length() != 0){
                 for (int i = 0; i < n.length(); i++){
                     char c = n.charAt(i);
                     if (!charsInTrie.contains(c)){
                         charsInTrie.add(c);
-                        System.out.println("Character added " + c + " for stopList "  + n);
+//                        System.out.println("Character added " + c + " for stopList "  + n);
                     }
                 }
             }
@@ -223,18 +230,13 @@ public class JourneyPlanner extends GUI {
         for (Trip t : tripsList){
             String n = t.name;
             t_trips.addName(n);
-            if(n.length() != 0){
-                for (int i = 0; i < n.length(); i++){
-                    char c = n.charAt(i);
-                    if (!charsInTrie.contains(c)){
-                        charsInTrie.add(c);
-//                        System.out.println("Character added " + c + " for tripList "  + n);
-                    }
-                }
-            }
-            System.out.println("JP 218 onLoad num chars in Trie " + charsInTrie.size());
+            // Since I generate the trip names from the stop names, no chars are ever added to the Trie span
         }
-        List<String> results = t_stops.getAllFromPrefix("Cas", charsInTrie);
+        List<String> results = new ArrayList<>();
+        results = t_stops.getAllFromPrefix("Cas", charsInTrie);
+        System.out.println("JP ln 231 " + results.size());
+        System.out.println("JP ln 232 results 0  " + results.get(0));
+        System.out.println("JP ln 232 results last " + results.get(results.size() - 1));
 
 //        Now all the stop and trip names are in a Trie structure
 //        And I can search for a Boolean is it there or not and retrieve a name from the Trie

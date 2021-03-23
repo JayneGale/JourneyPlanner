@@ -5,6 +5,7 @@ public class TrieNode {
     HashMap<Character, TrieNode> child = new HashMap<>();
 //    static final int alphabetsize = 39; // 26 lower case letters, 10 numerals 0-9, and special characters space, ' and &
     boolean isLast = false;
+    // this retrieves the object - currently either the stop_name or the trip_name but if I create a generic Type it could potentially retrieve the Stop or Trip object
     String name;
     char c;
     List<String> results; // in this case the objects are Strings (names of stops or trips)
@@ -19,7 +20,6 @@ public class TrieNode {
     public HashMap<Character, TrieNode> GetChild() {
         return child;
     }
-
     public void setChild(HashMap<Character, TrieNode> child) {
         this.child = child;
     }
@@ -31,12 +31,11 @@ public class TrieNode {
         this.isLast = isLast;
     }
 
-    public String getName(String name) {return name; }
+    public String getName(String name) {return name; } // only used for testing if the name that should be in thr Trie is there
     public void setName(String name) {this.name = name; }
 
     public List<String> getResults( String prefix) {return results; }
-//    public void setResults( List<String> results) {this.results = results; }
-
+    public void setResults( List<String> results) {this.results = results; }
 
 }
 

@@ -119,82 +119,89 @@ public class TrieNodeActions {
     public List<String> getAllFromPrefix(String prefix, List<Character> charsInTrie) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
-        List<String> results = null;
-        String name = null;
+        List<String> results = new ArrayList<>();
+        int times = 0;
 
         // for c in prefix
         for (int i = 0; i < prefix.length(); i++) {
             char c = prefix.charAt(i);
 //    for (c : prefix) {
 //        move	node to	the	child	corresponding	to	c;
-//    }
             if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
-                // if the prefixeg Gurd 568 already contains a complete name eg Gurd, we don't want  Gurd to the list if they typ - oh wait, no
+                System.out.println("GetAllfromPrefix pLn 132 prefix  " + prefix + " c " + c); // there are 63 chars in the names; could reduce this by toLower
+                // we don't add in any results before the end of the prefix because if the prefix eg Gurd ( 568) already contains a complete name eg Gurd, we don't add Gurd to the list if they type more
+                if (tnode.isLast()) {
+                    String name = tnode.getName(tnode.name);
+//            if it is, add it to the list and carry on down the trie, it may not be the only last in this branch
+                    results.add(prefix);
+                    System.out.println("prefix  " + prefix + " name " + name); // there are 63 chars in the names; could reduce this by toLower
+                }
             }
-//        else if (node’s	children	do	not	contain	c)
-//        return null;
+//        else if (node’s	children	do	not	contain	c)        return null; // because there is no branch that contains the prefix at all
             else {
                 tnode = null;
                 break;
             }
         }
-
+        //once we reach the end of the prefix word, check if its a complete name just in case they have typed the whole name
+        System.out.println("prefix  " + prefix + " times " + times); // there are 63 chars in the names; could reduce this by toLower
+        times++;
+        results = getAll(tnode, results, charsInTrie);
 //      from lecture notes:
 //      add	node.objects into	results;
 //        for (each	child of	node)
 //        getAllFrom(child, results);
 //    }
-//    public List<Object> getAll(String prefix) {
-
-        if (tnode != null) {
-            if (tnode.isLast()) {
-//            if the last char in the prefix is a complete name, add it to the list
-                results.add(prefix);
+//    public List<Object> getAll(String prefix)
+        int num = results.size();
+        System.out.println("getAllfrom ln 154 results = " + num + " times " + times);
+        if(num <=0){
+            System.out.println("getAllfrom ln 154 something has gone wrong results is empty");
+        }
+        else {
+            if (num > 5) {
+                num = 5;
             }
-            child = tnode.GetChild();
-            System.out.println("charsInTrie " + charsInTrie.size());
-            System.out.println("charsInTrie " + charsInTrie.get(0));
-// I am up to here
-            for (char c  : charsInTrie) {
-               getAll(child.get(c), results, charsInTrie);
-//            for (TrieNode  : charsInTrie) {
-//                tnode = child.get(c);
-//                child = tnode.GetChild();
-//                // even if prefix is a name, keep going and find all the rest of the names  in the trie
-//            getAll(child, results, charsInTrie);
+            for (int i = 0; i < num; i++) {
+                System.out.println("getAllfrom ln 154 results =  " + results.get(results.size() - 1));
             }
         }
         return results;
     }
 
-    public void getAll(TrieNode tnode, List<String> results, List<Character> charsInTrie) {
-        if (tnode.isLast) {
-            results.add(tnode.name);
-        }
-        // this is not else this is and, because we don't stop at this isLast
+    public List<String> getAll(TrieNode tnode, List<String> results, List<Character> charsInTrie) {
+        // get all the Trienodes below the prefix by searching through all the characters that might be in the branch charsInTrie
+        int count = 0;
+        HashMap<Character, TrieNode> child = tnode.GetChild();
         for (char c : charsInTrie) {
-            HashMap child = tnode.GetChild();
-            System.out.println("tnode " + tnode + child);
-//            if(child.containsKey(c)) {
-//                tnode = child.get(c);
-//                    getAll(, results, charsInTrie);
-//
-//                }
-//                tnode = child.get(c);
-//                child = tnode.GetChild();
-//                getAll(child, results, charsInTrie);
-
-            // if the prefixeg Gurd 568 already contains a complete name eg Gurd, we don't want  Gurd to the list if they typ - oh wait, n
+            if (child.containsKey(c)) {
+                count++;
+                tnode = child.get(c); // move down a node from the prefix
+                if (tnode == null){
+                    break;
+                }
+                System.out.println("getAll ln 1741 c " + c + " count " + count + child.containsKey(c));
+                child = tnode.GetChild();
+                if(child == null){
+                    break;
+                }
+                System.out.println("getAll ln 186 c " + c + " count " + count + child.containsKey(c));
+                if (tnode.isLast) {
+                    results.add(tnode.name);
+                    System.out.println("getAll ln 174 tnode.name " + tnode.name + " resutls size " + results.size() + " count " + count);
+                    }
+                if(tnode.GetChild() == null) {
+                    break;
+                }
+                results = getAll(tnode, results, charsInTrie);
+                if(results.size()>10) break;
+            }
         }
-//        for ( )
-//        children = tnode.GetChild();
-//        getAll(tnode.child, results);
-//        }
+        return results;
     }
 }
-
 //        public void InitialiseTrie (){
 //        root = new TrieNode();
 //            HashMap<Character, TrieNode> child = root.GetChild();

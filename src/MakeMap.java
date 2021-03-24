@@ -37,25 +37,19 @@ public class MakeMap {
 //                        System.out.println(" MakeMap 37 new Edge for Stop " + e.fromStop.stop_name + " to Stop" + e.toStop.stop_name);
                     }
                    edgeList = AddTripEdge(e, edgeList);
-                    //ugh I could put this in here when generating the edgelist, but this list repeats so  have to return 2 values ie the Graph, so do this later from the final edgeList
+                    //I could put this in here when generating the edgelist, but this list repeats so  have to return 2 values ie the Graph, so do this later from the final edgeList
 //                   fromStop.adjListOutgoing.add(e);
 //                   toStop.adjListIncoming.add(e);
                 }
             }
         }
-//        int numEdges = edgeList.size();
-//        System.out.println("ln 44 MakeMap CreateEdgeList finished, there are " + numEdges + "edges in the list.");
-//        if (numEdges > 0)
-//                System.out.println("Ln 46 makeMap the First Edge is from " + edgeList.get(0).fromStop.stop_name + " to " + edgeList.get(0).toStop.stop_name + ". The Last Edge is from " + edgeList.get(numEdges-1).fromStop.stop_name + " to " + edgeList.get(numEdges-1).toStop.stop_name) ;
         return edgeList;
     }
 
     public Graph CreateGraph(List<Stop> stopsList, List<Edge> edgeList) {
         Graph gr = new Graph(stopsList, edgeList);
         System.out.println("CreateGraph started ");
-//        for (Edge e : edgeList){
-//
-//        }
+
         for (Stop s : stopsList) {
             List<Edge> adjListIn = s.adjListIncoming;
             List <Edge> adjListOut = s.adjListOutgoing;
@@ -70,19 +64,4 @@ public class MakeMap {
         }
         return edgeList;
     }
-
-//    public List<Stop> CreateAdjacencyLists(List<Edge> edgeList, List<Stop> stopsList) {
-//        for (e : edgeList){
-//
-//        }
-//        return stopsList
-//    }
-// Put these into draw() But where to put draw()
-//        double scale;
-//        double screenpixel_u = JourneyPlanner.getDrawingAreaDimension().getWidth();
-//        double screenpixel_v= JourneyPlanner.getDrawingAreaDimension().getHeight();
-//        double scale_x = screenpixel_u/max_xdist;
-//        double scale_y = screenpixel_v/max_ydist;
-//        scale = Math.min(scale_x, scale_y);
-//        System.out.println("scale " + scale + " scale_x " + scale_x + " Scale y " + scale_y);
 }

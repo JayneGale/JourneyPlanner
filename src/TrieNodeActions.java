@@ -33,7 +33,7 @@ public class TrieNodeActions {
         if (name.length() != 0) {
             for (int i = 0; i < name.length(); i++) {
                 // convert the name into lower case characters to reduces  tree width and its more user friendly (case insensitive) to search stop names;
-                char c = Character.toLowerCase(name.charAt(i));
+                char c = name.charAt(i);
 //                char c = name.charAt(i);
                 //store the each char element c to be the new child until reach the end of the word
                 TrieNode tnode;
@@ -91,7 +91,7 @@ public class TrieNodeActions {
         TrieNode tnode = null;
 
         for (int i = 0; i < name.length(); i++) {
-            char c = Character.toLowerCase(name.charAt(i));
+            char c = name.charAt(i);
             if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
@@ -118,14 +118,13 @@ public class TrieNodeActions {
 //    return results;
 //}
 
-    public List<String> getAllFromPrefix(String prefix, List<Character> charsInTrie) {
+    public List<String> getAllFromPrefix(String prefix) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
         List<String> results = new ArrayList<String>();
-
         // for c in prefix
         for (int i = 0; i < prefix.length(); i++) {
-            char c = Character.toLowerCase(prefix.charAt(i));
+            char c = prefix.charAt(i);
 //    for (c : prefix) {
 //        move	node to	the	child	corresponding	to	c;
             if (child.containsKey(c)) {
@@ -175,54 +174,19 @@ public class TrieNodeActions {
         // get all the Trienodes below the prefix by searching through all the characters that might be in the branch charsInTrie
         int count = 0;
         HashMap<Character, TrieNode> child = tnode.GetChild();
-        boolean tnodeHasChild = false;
         if(child == null){
             System.out.println("getAll ln 180 child is null " + " count " + count);
             return results;
         }
-        for (char c : charsInTrie) {
-            tnodeHasChild = false;
-            if(!child.containsKey(c)){
-                // go on to the next char
-                continue;
+        for (TrieNode t : child.values()){
+            if (t.isLast) {
+                results.add(t.name);
+                System.out.println("getAll ln 205 t.name " + t.name + " resutls size " + results.size());
             }
-            else {
-                count++;
-                tnodeHasChild = true;
-                tnode = child.get(c); // move down a node from the prefix
-                if (tnode == null){
-                    System.out.println("getAll ln 193 tnode is null " + c);
-                    break;
-                }
-//                System.out.println("getAll before ln 192 c " + c + " count " + count + child.containsKey(c));
-                child = tnode.GetChild();
-                if(child == null){
-                    System.out.println("getAll ln 199 tnode.GetChild is null " + c);
-                    break;
-                }
-                if (tnode.isLast) {
-                    if(!results.contains(tnode.name)){
-                        results.add(tnode.name);
-                        System.out.println("getAll ln 205 c "  + c + " tnode.name " + tnode.name + " resutls size " + results.size() + " count " + count + " tnodeHasChild " + tnodeHasChild);
-                    }
-                }
-                results = getAll(tnode, results, charsInTrie);
-                if(results.size()>12) break;
-            }
+            results = getAll(t, results, charsInTrie);
         }
         return results;
     }
 }
-//        public void InitialiseTrie (){
-//        root = new TrieNode();
-//            HashMap<Character, TrieNode> child = root.GetChild();
-//            for (char i = 'a'; i <= 'z'; i++){
-//                child.put(i, null); // this sets all children of lower case alphabetic HashMap Key to null
-//            }
-//            child.put(' ', null); // this adds the special character space
-//            child.put('&', null); // this adds the special character &
-//            child.put('\'', null); // this adds the special character ' (escaped
-//            root.isLast = false;
-//        }
 
 

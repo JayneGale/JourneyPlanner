@@ -9,8 +9,10 @@ public class Trip {
     Stop firstStop;
     Stop lastStop;
     String name;
+    public boolean isHighlightedTrip = false;
 
-// A trip is a sequence of Stops for a bus. It's normal for a Bus to display its final Stop (lastStop) to identify it to potential users of the Trip
+
+    // A trip is a sequence of Stops for a bus. It's normal for a Bus to display its final Stop (lastStop) to identify it to potential users of the Trip
     public Trip(String trip_id, List<Stop> tripSequence, Stop firstStop, Stop lastStop){ //, Stop fromStop, Stop toStop)
         this.trip_id= trip_id;
         this.tripSequence = tripSequence;

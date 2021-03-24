@@ -35,7 +35,6 @@ public class Graph {
                 Edge incomingEdge = e;
                 Stop incomingNeighbour = e.fromStop;
             }
-        //            draw(g, highlightStop);
         }
     }
     // Graph requires a draw method

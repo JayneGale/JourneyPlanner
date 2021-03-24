@@ -8,7 +8,7 @@ public class Stop {
     double stop_lat;
     double stop_lon;
     Location stop_xy;
-    int boxSize = 8;
+    int boxSize = 6;
     int halfboxSize = boxSize/2;
     // TO DO: create adjacency lists from Trip sequences
     public List<Edge> adjListIncoming;

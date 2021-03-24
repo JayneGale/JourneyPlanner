@@ -225,11 +225,11 @@ public class JourneyPlanner extends GUI {
         for (Stop s : stopsList){
             String n = s.stop_name;
             t_stops.addName(n);
-            // creating a complete list of characters in the Trie for the prefix search
-            // If I get time I could reduce the span of the trie by 23 (up to 26 by making all the stop_name chars toLower in the Trie but retrieving the full name in the Get
+
+            // create a complete list of characters in the Trie for the prefix search
             if(n.length() != 0){
                 for (int i = 0; i < n.length(); i++){
-                    char c = n.charAt(i);
+                    char c = Character.toLowerCase(n.charAt(i));
                     if (!charsInTrie.contains(c)){
                         charsInTrie.add(c);
 //                        System.out.println("Character added " + c + " for stopList "  + n);
@@ -237,6 +237,7 @@ public class JourneyPlanner extends GUI {
                 }
             }
         }
+//        System.out.println("Chars in Trie  " + charsInTrie.size()); toLowerCase reduces the search from 62 to 41
 
         TrieNodeActions t_trips = new TrieNodeActions();
         for (Trip t : tripsList){

@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JourneyPlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JourneyPlanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrieNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrieNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrieNodeActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrieNodeActions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,9 +93,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/JourneyPlanner.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/TrieNodeActions.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

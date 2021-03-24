@@ -32,8 +32,10 @@ public class TrieNodeActions {
         // skip if trying to add a null word
         if (name.length() != 0) {
             for (int i = 0; i < name.length(); i++) {
+                // convert the name into lower case characters to reduces  tree width and its more user friendly (case insensitive) to search stop names;
+                char c = Character.toLowerCase(name.charAt(i));
+//                char c = name.charAt(i);
                 //store the each char element c to be the new child until reach the end of the word
-                char c = name.charAt(i);
                 TrieNode tnode;
                 if (child.containsKey(c)) {
                     tnode = child.get(c);
@@ -89,7 +91,7 @@ public class TrieNodeActions {
         TrieNode tnode = null;
 
         for (int i = 0; i < name.length(); i++) {
-            char c = name.charAt(i);
+            char c = Character.toLowerCase(name.charAt(i));
             if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
@@ -119,25 +121,18 @@ public class TrieNodeActions {
     public List<String> getAllFromPrefix(String prefix, List<Character> charsInTrie) {
         HashMap<Character, TrieNode> child = root.GetChild();
         TrieNode tnode = null;
-        List<String> results = new ArrayList<>();
-        int times = 0;
+        List<String> results = new ArrayList<String>();
 
         // for c in prefix
         for (int i = 0; i < prefix.length(); i++) {
-            char c = prefix.charAt(i);
+            char c = Character.toLowerCase(prefix.charAt(i));
 //    for (c : prefix) {
 //        move	node to	the	child	corresponding	to	c;
             if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
-                System.out.println("GetAllfromPrefix pLn 132 prefix  " + prefix + " c " + c); // there are 63 chars in the names; could reduce this by toLower
+                System.out.println("GetAllfromPrefix Ln 134 prefix  " + prefix + " c " + c); // there are 63 chars in the names; could reduce this by toLower
                 // we don't add in any results before the end of the prefix because if the prefix eg Gurd ( 568) already contains a complete name eg Gurd, we don't add Gurd to the list if they type more
-                if (tnode.isLast()) {
-                    String name = tnode.getName(tnode.name);
-//            if it is, add it to the list and carry on down the trie, it may not be the only last in this branch
-                    results.add(prefix);
-                    System.out.println("prefix  " + prefix + " name " + name); // there are 63 chars in the names; could reduce this by toLower
-                }
             }
 //        else if (node’s	children	do	not	contain	c)        return null; // because there is no branch that contains the prefix at all
             else {
@@ -146,8 +141,13 @@ public class TrieNodeActions {
             }
         }
         //once we reach the end of the prefix word, check if its a complete name just in case they have typed the whole name
-        System.out.println("prefix  " + prefix + " times " + times); // there are 63 chars in the names; could reduce this by toLower
-        times++;
+        // if the prefix alone is a stop name, add it to the results list but carry on down the trie, it may not be the only last in this branch
+        // name should equal prefix here
+        if (tnode.isLast()) {
+            String name = tnode.getName(tnode.name);
+            results.add(name);
+            System.out.println("prefix  " + prefix + " name " + name); // there are 41 chars in the Trie
+        }
         results = getAll(tnode, results, charsInTrie);
 //      from lecture notes:
 //      add	node.objects into	results;
@@ -156,16 +156,16 @@ public class TrieNodeActions {
 //    }
 //    public List<Object> getAll(String prefix)
         int num = results.size();
-        System.out.println("getAllfrom ln 154 results = " + num + " times " + times);
+        System.out.println("on coming back from getAll to getAllfrom (ln 159) results size = " + num);
         if(num <=0){
-            System.out.println("getAllfrom ln 154 something has gone wrong results is empty");
+            System.out.println("getAllfrom ln 161 something has gone wrong results is empty");
         }
         else {
             if (num > 5) {
                 num = 5;
             }
             for (int i = 0; i < num; i++) {
-                System.out.println("getAllfrom ln 154 results =  " + results.get(results.size() - 1));
+                System.out.println("getAllfrom ln 154 end results size =  " + results.get(i));
             }
         }
         return results;
@@ -175,19 +175,25 @@ public class TrieNodeActions {
         // get all the Trienodes below the prefix by searching through all the characters that might be in the branch charsInTrie
         int count = 0;
         HashMap<Character, TrieNode> child = tnode.GetChild();
+        if(child == null){
+            System.out.println("getAll ln 181 child is null " + " count " + count);
+            return results;
+        }
+        boolean nodeHasChild = false;
         for (char c : charsInTrie) {
             if (child.containsKey(c)) {
                 count++;
+                nodeHasChild = true;
                 tnode = child.get(c); // move down a node from the prefix
                 if (tnode == null){
                     break;
                 }
-                System.out.println("getAll ln 1741 c " + c + " count " + count + child.containsKey(c));
+                System.out.println("getAll ln 192 c " + c + " count " + count + child.containsKey(c));
                 child = tnode.GetChild();
                 if(child == null){
                     break;
                 }
-                System.out.println("getAll ln 186 c " + c + " count " + count + child.containsKey(c));
+                System.out.println("getAll ln 197 c " + c + " count " + count + child.containsKey(c));
                 if (tnode.isLast) {
                     results.add(tnode.name);
                     System.out.println("getAll ln 174 tnode.name " + tnode.name + " resutls size " + results.size() + " count " + count);

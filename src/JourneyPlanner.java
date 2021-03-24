@@ -245,8 +245,11 @@ public class JourneyPlanner extends GUI {
             t_trips.addName(n);
             // Since I generate the trip names from the stop names, no chars are ever added to the Trie span
         }
-        List<String> results = new ArrayList<>();
-        results = t_stops.getAllFromPrefix("Cas", charsInTrie);
+        String testName = "Casuarina Interchange";
+        String returnedName = t_stops.searchName(testName);
+        System.out.println("JP ln 250 returnedName for " + testName + " is " + returnedName);
+        List<String> results = new ArrayList<String>();
+        results = t_stops.getAllFromPrefix("Ca", charsInTrie);
         System.out.println("JP ln 231 " + results.size());
         System.out.println("JP ln 232 results 0  " + results.get(0));
         System.out.println("JP ln 232 results last " + results.get(results.size() - 1));

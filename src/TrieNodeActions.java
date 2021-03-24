@@ -131,7 +131,7 @@ public class TrieNodeActions {
             if (child.containsKey(c)) {
                 tnode = child.get(c);
                 child = tnode.GetChild();
-                System.out.println("GetAllfromPrefix Ln 134 prefix  " + prefix + " c " + c); // there are 63 chars in the names; could reduce this by toLower
+//                System.out.println("GetAllfromPrefix Ln 134 prefix  " + prefix + " c " + c); // there are 63 chars in the names; could reduce this by toLower
                 // we don't add in any results before the end of the prefix because if the prefix eg Gurd ( 568) already contains a complete name eg Gurd, we don't add Gurd to the list if they type more
             }
 //        else if (node’s	children	do	not	contain	c)        return null; // because there is no branch that contains the prefix at all
@@ -175,34 +175,39 @@ public class TrieNodeActions {
         // get all the Trienodes below the prefix by searching through all the characters that might be in the branch charsInTrie
         int count = 0;
         HashMap<Character, TrieNode> child = tnode.GetChild();
+        boolean tnodeHasChild = false;
         if(child == null){
-            System.out.println("getAll ln 181 child is null " + " count " + count);
+            System.out.println("getAll ln 180 child is null " + " count " + count);
             return results;
         }
-        boolean nodeHasChild = false;
         for (char c : charsInTrie) {
-            if (child.containsKey(c)) {
+            tnodeHasChild = false;
+            if(!child.containsKey(c)){
+                // go on to the next char
+                continue;
+            }
+            else {
                 count++;
-                nodeHasChild = true;
+                tnodeHasChild = true;
                 tnode = child.get(c); // move down a node from the prefix
                 if (tnode == null){
+                    System.out.println("getAll ln 193 tnode is null " + c);
                     break;
                 }
-                System.out.println("getAll ln 192 c " + c + " count " + count + child.containsKey(c));
+//                System.out.println("getAll before ln 192 c " + c + " count " + count + child.containsKey(c));
                 child = tnode.GetChild();
                 if(child == null){
+                    System.out.println("getAll ln 199 tnode.GetChild is null " + c);
                     break;
                 }
-                System.out.println("getAll ln 197 c " + c + " count " + count + child.containsKey(c));
                 if (tnode.isLast) {
-                    results.add(tnode.name);
-                    System.out.println("getAll ln 174 tnode.name " + tnode.name + " resutls size " + results.size() + " count " + count);
+                    if(!results.contains(tnode.name)){
+                        results.add(tnode.name);
+                        System.out.println("getAll ln 205 c "  + c + " tnode.name " + tnode.name + " resutls size " + results.size() + " count " + count + " tnodeHasChild " + tnodeHasChild);
                     }
-                if(tnode.GetChild() == null) {
-                    break;
                 }
                 results = getAll(tnode, results, charsInTrie);
-                if(results.size()>10) break;
+                if(results.size()>12) break;
             }
         }
         return results;

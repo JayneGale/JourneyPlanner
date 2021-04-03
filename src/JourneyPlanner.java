@@ -83,9 +83,9 @@ public class JourneyPlanner extends GUI {
         int num = results.size();
         // return the first 6 results
         if (num > 0) {
-            getTextOutputArea().setText("Showing 4 of " + results.size() + " Bus Stops");
             if (num > maxResultsList) {
                 num = maxResultsList;
+                getTextOutputArea().setText("Showing " + maxResultsList + " of " + results.size() + " Bus Stops");
             }
             for (int i = 0; i < num; i++) {
                 getTextOutputArea().append("\n " + results.get(i));
